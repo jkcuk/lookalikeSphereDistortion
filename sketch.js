@@ -50,25 +50,25 @@ function setup() {
 
   ff = createP();
   ff.position(0,0);
-  ff.html(`V1.25`);
+  ff.html(`V1.26`);
 
   rvx = createInput(0.0,'double');
   rvx.position(50, 67);
   ff2 = createP();
   ff2.position(10,50);
-  ff2.html(`V<sub>x</sub>/c:`);
+  ff2.html(`<i>v</i><sub><i>x</i></sub>/<i>c</i> =`);
  
   rvy = createInput(0.0,'double');
   rvy.position(50, 90);
   ff3 = createP();
   ff3.position(10,75);
-  ff3.html(`Vy/c:`);
+  ff3.html(`<i>v</i><sub><i>y</i></sub>/<i>c</i> =`);
  
   rvz = createInput(0.0,'double');
   rvz.position(50, 116);
   ff4 = createP();
   ff4.position(10,100);
-  ff4.html(`Vz/c:`);
+  ff4.html(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
 
   errorText = createP();
   errorText.position(400,30);
