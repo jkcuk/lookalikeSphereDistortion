@@ -1,6 +1,6 @@
 let theShader;
-let speedtest=1.5;
-let headingtest=50;
+// let speedtest=1.5;
+// let headingtest=50;
 let PHI1=0;
 let THETA1=180; 
 let cam;
@@ -10,19 +10,15 @@ let betay;
 let betaz;
 let phi=0;
 let theta=0;
-let radius=10;//200;
+let radius=10;//200; // radius of the lookalike sphere
 let beta;
 let gamma;
 let textureImg;
-let motion = false;
-let rvx;
-let rvy;
-let rvz;
-let ff;
-let ff2;
-let ff3;
-let ff4;
-let errorText;
+// let motion = false;
+let vxInput;
+let vyInput;
+let vzInput;
+let errorLabel;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -48,30 +44,30 @@ function setup() {
  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
-  ff = createP();
-  ff.position(0,0);
-  ff.html(`V1.26`);
+  let versionLabel = createP(`V1.26`);
+  versionLabel.position(0,0);
+  // versionLabel.html(`V1.26`);
 
-  rvx = createInput(0.0,'double');
-  rvx.position(50, 67);
-  ff2 = createP();
-  ff2.position(10,50);
-  ff2.html(`<i>v</i><sub><i>x</i></sub>/<i>c</i> =`);
+  vxInput = createInput(0.0,'double');
+  vxInput.position(50, 67);
+  let vxLabel = createP(`<i>v</i><sub><i>x</i></sub>/<i>c</i> =`);
+  vxLabel.position(10,50);
+  // vxLabel.html(`<i>v</i><sub><i>x</i></sub>/<i>c</i> =`);
  
-  rvy = createInput(0.0,'double');
-  rvy.position(50, 90);
-  ff3 = createP();
-  ff3.position(10,75);
-  ff3.html(`<i>v</i><sub><i>y</i></sub>/<i>c</i> =`);
+  vyInput = createInput(0.0,'double');
+  vyInput.position(50, 90);
+  let vyLabel = createP(`<i>v</i><sub><i>y</i></sub>/<i>c</i> =`);
+  vyLabel.position(10,75);
+  // vyLabel.html(`<i>v</i><sub><i>y</i></sub>/<i>c</i> =`);
  
-  rvz = createInput(0.0,'double');
-  rvz.position(50, 116);
-  ff4 = createP();
-  ff4.position(10,100);
-  ff4.html(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
+  vzInput = createInput(0.0,'double');
+  vzInput.position(50, 116);
+  let vzLabel = createP(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
+  vzLabel.position(10,100);
+  // vzLabel.html(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
 
-  errorText = createP();
-  errorText.position(400,30);
+  errorLabel = createP();
+  errorLabel.position(400,30);
 
 
   
@@ -90,14 +86,23 @@ function setup() {
 
 function draw() {
   //background(200); 
- angleMode(DEGREES);
-  betax=rvx.value();
-  betay=rvy.value();
-  betaz=rvz.value();
+ //angleMode(DEGREES);
+  betax=vxLabel.value();
+  betay=vyLabel.value();
+  betaz=vzLabel.value();
 
-  angleMode(RADIANS);
+  let beta2 = betax*betax+betay*betay+betaz*betaz;
+ if (beta2 >=1 ){
+  const contentString = "Beta >= 1! Setting it to 0.99";
+  errorText.html(contentString.fontcolor("red")); 
+  beta = 0.99; 
+ } else{
+  beta=sqrt(beta2);
+ }
+  gamma=1/Math.sqrt(1-beta*beta);
+  
+
   //transform to theta and phi
-  let r=sqrt(betax*betax+betay*betay+betaz*betaz);
   if (r===0){
     THETA1=0
     PH1=0;
@@ -106,23 +111,13 @@ function draw() {
    PHI1=PI+atan2(-betax,-betaz);
   }
     
-  
+    angleMode(RADIANS);
+
 
   theta=THETA1; 
   phi=PHI1;     
   
- let beta2 = rvx.value()*rvx.value()+rvy.value()*rvy.value()+rvz.value()*rvz.value();
  
- if (beta2 >=1 ){
-  const contentString = "Beta is >= 1! normalising it to 0.99";
-  errorText.html(contentString.fontcolor("red")); 
-  
-  beta = 0.99; 
- } else{
-  beta=sqrt(beta2);
- }
-  gamma=1/Math.sqrt(1-beta*beta);
-  
 // distorted lookalike sphere
   rotateY(phi);
   rotateX(theta);
