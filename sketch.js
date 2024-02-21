@@ -1,5 +1,5 @@
 const version='1.30';
-et theShader;
+let theShader;
 // let speedtest=1.5;
 // let headingtest=50;
 let PHI1=0;
@@ -45,7 +45,7 @@ function setup() {
  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
-  let versionLabel = createP(`V1.28`);
+  let versionLabel = createP(version); // `V1.28`);
   versionLabel.position(0,0);
   // versionLabel.html(`V1.26`);
 
