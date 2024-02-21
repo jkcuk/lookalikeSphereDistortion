@@ -99,15 +99,15 @@ function draw() {
  } else{
   beta=sqrt(beta2);
  }
-  gamma=1/Math.sqrt(1-beta*beta);
+  gamma=1/Math.sqrt(1-beta2);
   
 
   //transform to theta and phi
-  if (r===0){
+  if (beta===0){
     THETA1=0
     PH1=0;
   }else{
-    THETA1=asin(-betay/r);
+    THETA1=asin(-betay/beta);
    PHI1=PI+atan2(-betax,-betaz);
   }
     
