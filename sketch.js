@@ -95,10 +95,10 @@ function draw() {
   let beta2 = betax*betax+betay*betay+betaz*betaz;
  if (beta2 >=1 ){
   const contentString = "Beta >= 1! Setting it to 0.99";
-  errorText.html(contentString.fontcolor("red")); 
+  errorLabel.html(contentString.fontcolor("red")); 
   beta = 0.99; 
  } else{
-  beta=sqrt(beta2);
+  beta=Math.sqrt(beta2);
  }
   gamma=1/Math.sqrt(1-beta2);
   
@@ -108,8 +108,8 @@ function draw() {
     THETA1=0
     PH1=0;
   }else{
-    THETA1=asin(-betay/beta);
-   PHI1=PI+atan2(-betax,-betaz);
+    THETA1=Math.asin(-betay/beta);
+   PHI1=PI+Math.atan2(-betax,-betaz);
   }
     
     angleMode(RADIANS);
