@@ -1,4 +1,5 @@
-let theShader;
+const version='1.30';
+et theShader;
 // let speedtest=1.5;
 // let headingtest=50;
 let PHI1=0;
@@ -44,7 +45,7 @@ function setup() {
  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
-  let versionLabel = createP(`V1.27`);
+  let versionLabel = createP(`V1.28`);
   versionLabel.position(0,0);
   // versionLabel.html(`V1.26`);
 
@@ -66,7 +67,7 @@ function setup() {
   vzLabel.position(10,100);
   // vzLabel.html(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
 
-  errorLabel = createP();
+  errorLabel = createP(version);
   errorLabel.position(400,30);
 
 
