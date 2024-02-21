@@ -19,7 +19,7 @@ let textureImg;
 let vxInput;
 let vyInput;
 let vzInput;
-let errorLabel;
+let statusLabel;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -45,10 +45,6 @@ function setup() {
  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
-  let versionLabel = createP(version); // `V1.28`);
-  versionLabel.position(0,0);
-  // versionLabel.html(`V1.26`);
-
   vxInput = createInput(0.0,'double');
   vxInput.position(50, 67);
   let vxLabel = createP(`<i>v</i><sub><i>x</i></sub>/<i>c</i> =`);
@@ -67,8 +63,8 @@ function setup() {
   vzLabel.position(10,100);
   // vzLabel.html(`<i>v</i><sub><i>z</i></sub>/<i>c</i> =`);
 
-  errorLabel = createP(version);
-  errorLabel.position(400,30);
+  statusLabel = createP('Distortor '+version);
+  statusLabel.position(0,0);
 
 
   
@@ -95,7 +91,7 @@ function draw() {
   let beta2 = betax*betax+betay*betay+betaz*betaz;
  if (beta2 >=1 ){
   const contentString = "Beta >= 1! Setting it to 0.99";
-  errorLabel.html(contentString.fontcolor("red")); 
+  statusLabel.html(contentString.fontcolor("red")); 
   beta = 0.99; 
  } else{
   beta=Math.sqrt(beta2);
