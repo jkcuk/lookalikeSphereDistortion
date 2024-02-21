@@ -44,7 +44,7 @@ function setup() {
  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
-  let versionLabel = createP(`V1.26`);
+  let versionLabel = createP(`V1.27`);
   versionLabel.position(0,0);
   // versionLabel.html(`V1.26`);
 
