@@ -50,13 +50,13 @@ function setup() {
 
   ff = createP();
   ff.position(0,0);
-  ff.html(`V1.24`);
+  ff.html(`V1.25`);
 
   rvx = createInput(0.0,'double');
   rvx.position(50, 67);
   ff2 = createP();
   ff2.position(10,50);
-  ff2.html(`Vx/c:`);
+  ff2.html(`V<sub>x</sub>/c:`);
  
   rvy = createInput(0.0,'double');
   rvy.position(50, 90);
