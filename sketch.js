@@ -52,19 +52,19 @@ function setup() {
   ff.position(0,0);
   ff.html(`V1.24`);
 
-  rvx = createInput(0.0,'double');
+  rvx = createInput('0.0','double');
   rvx.position(50, 67);
   ff2 = createP();
   ff2.position(10,50);
   ff2.html(`Vx/c:`);
  
-  rvy = createInput(0.0,'double');
+  rvy = createInput('0.0','double');
   rvy.position(50, 90);
   ff3 = createP();
   ff3.position(10,75);
   ff3.html(`Vy/c:`);
  
-  rvz = createInput(0.0,'double');
+  rvz = createInput('0.0','double');
   rvz.position(50, 116);
   ff4 = createP();
   ff4.position(10,100);
