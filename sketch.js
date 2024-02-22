@@ -18,6 +18,7 @@ let motion = false;
 let rvx;
 let rvy;
 let rvz;
+let vxSlider;
 let ff;
 let ff2;
 let ff3;
@@ -53,6 +54,9 @@ function setup() {
   ff.position(0,0);
   ff.html(`V1.24`);
 
+  vxSlider = createSlider(0, 1);
+  vxSlider.position(50, 20);
+  vxSlider.size(100);
   rvx = createInput('0.0','double');
   rvx.position(50, 67);
   ff2 = createP();
@@ -92,7 +96,7 @@ function setup() {
 function draw() {
   //background(200); 
  angleMode(DEGREES);
-  betax=rvx.value();
+  betax=vxSlider.value();
   betay=rvy.value();
   betaz=rvz.value();
 
