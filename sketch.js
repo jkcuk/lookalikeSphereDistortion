@@ -99,15 +99,16 @@ function draw() {
   betax=vxSlider.value();
   betay=rvy.value();
   betaz=rvz.value();
+ let beta2=betax*betax+betay*betay+betaz*betaz;
 
   angleMode(RADIANS);
   //transform to theta and phi
-  let r=sqrt(betax*betax+betay*betay+betaz*betaz);
-  if (r===0){
+  beta=sqrt(beta2);
+  if (beta===0){
     THETA1=0
     PH1=0;
   }else{
-    THETA1=asin(-betay/r);
+    THETA1=asin(-betay/beta);
    PHI1=PI+atan2(-betax,-betaz);
   }
 
@@ -116,9 +117,7 @@ function draw() {
 
   theta=THETA1; 
   phi=PHI1;     
-  
- let beta2 = rvx.value()*rvx.value()+rvy.value()*rvy.value()+rvz.value()*rvz.value();
- 
+
  if (beta2 >=1 ){
   const contentString = "Beta is >= 1! normalising it to 0.99";
   errorText.html(contentString.fontcolor("red")); 
@@ -127,7 +126,7 @@ function draw() {
  } else{
   beta=sqrt(beta2);
  }
-  gamma=1/Math.sqrt(1-beta*beta);
+  gamma=1/Math.sqrt(1-beta2);
   
 // distorted lookalike sphere
   rotateY(phi);
