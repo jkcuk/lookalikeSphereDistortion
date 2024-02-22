@@ -106,7 +106,7 @@ function draw() {
    PHI1=PI+atan2(-betax,-betaz);
   }
     
-  
+  errorText.html(`width: ${cam.width} height: ${cam.height}`);
 
   theta=THETA1; 
   phi=PHI1;     
