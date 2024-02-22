@@ -39,7 +39,7 @@ function preload() {
   // 
   // });
   cam = createCapture(constraints);
-  alert(`width: ${cam.width} height: ${cam.height}`);
+  // alert(`width: ${cam.width} height: ${cam.height}`);
   cam.hide();
 }
 
