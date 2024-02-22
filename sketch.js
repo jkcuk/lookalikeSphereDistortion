@@ -33,7 +33,8 @@ function preload() {
   let constraints = {
   video: {
     facingMode: {
-     exact: "environment"
+     exact:"user"
+     // exact: "environment"
     },
     width: { exact: 1280 },
     height: { exact: 720 }
@@ -78,8 +79,8 @@ function setup() {
   ff4.html(`Vz/c:`);
 
   fudgeFactorSlider = createSlider(-3, 1, 0, 0);
-  fudgeFactorSlider.position(50, 150);
-  fudgeFactorSlider.size(500);
+  fudgeFactorSlider.position(50, windowHeight+20);
+  fudgeFactorSlider.size(windowWidth-100);
 
 
   errorText = createP();
