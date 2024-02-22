@@ -29,7 +29,8 @@ function preload() {
   let constraints = {
   video: {
     facingMode: {
-      exact: "environment"
+     optional: "environment"
+//      exact: "environment"
     },
     width: { exact: 1280 },
     height: { exact: 720 }
