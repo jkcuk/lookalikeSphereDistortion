@@ -19,12 +19,14 @@ let rvx;
 let rvy;
 let rvz;
 let vxSlider;
+let fudgeFactorSlider;
 let ff;
 let ff2;
 let ff3;
 let ff4;
 let errorText;
 let aspectRatio;
+let fudgeFactor;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -74,6 +76,11 @@ function setup() {
   ff4 = createP();
   ff4.position(10,100);
   ff4.html(`Vz/c:`);
+
+  fudgeFactorSlider = createSlider(-3, 1, 0, 0);
+  fudgeFactorSlider.position(50, 150);
+  fudgeFactorSlider.size(500);
+
 
   errorText = createP();
   errorText.position(400,30);
@@ -129,6 +136,7 @@ function draw() {
   gamma=1/Math.sqrt(1-beta2);
   
 // distorted lookalike sphere
+ fudgeFactor = Math.pow(10, fudgeFactorSlider.value());
   rotateY(phi);
   rotateX(theta);
   scale(1/gamma, 1/gamma, 1);
@@ -137,6 +145,7 @@ function draw() {
   rotateY(-phi);
   theShader.setUniform('uTex', cam);
   theShader.setUniform('aspectRatio', aspectRatio);
+ theShader.setUniform('fudgeFactor', fudgeFactor);
   resetShader();
   shader(theShader);
   sphere(radius,200);
