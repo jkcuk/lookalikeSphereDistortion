@@ -56,7 +56,7 @@ function setup() {
 
   vxSlider = createSlider(0, 1);
   vxSlider.position(50, 20);
-  vxSlider.size(100);
+  vxSlider.size(300);
   rvx = createInput('0.0','double');
   rvx.position(50, 67);
   ff2 = createP();
