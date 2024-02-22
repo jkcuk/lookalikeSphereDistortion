@@ -6,6 +6,7 @@ varying vec2 zPlaneCoord;
 uniform sampler2D uTex;
 
 void main() {
+  let float radius=10.0;
   // float longitude = mix(-PI, PI, vTexCoord.x);
   // float latitude = mix(-PI/2.0, PI/2.0, vTexCoord.y);
   // float Yboard=atan(tan(PI/9.0)*cos(longitude));
@@ -18,7 +19,7 @@ void main() {
     // float aflat=mix(0.0,1.0,transfactlat);
     // vec2 transjingwei=vec2(1.0-aflong,aflat);
     // gl_FragColor = texture2D(uTex, transjingwei);
-    gl_FragColor = texture2D(uTex, vec2(mix(0.0, 1.0, zPlaneCoord.x), mix(0.0, 1.0, zPlaneCoord.y)));
+    gl_FragColor = texture2D(uTex, vec2(0.5+0.5*zPlaneCoord.x/radius, 0.5+0.5*zPlaneCoord.y/radius));
   } else {
     gl_FragColor = vec4(1.0);
   }
