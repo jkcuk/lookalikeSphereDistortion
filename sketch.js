@@ -30,15 +30,16 @@ function preload() {
   video: {
     facingMode: {
      exact: "environment"
-    },
-    width: { exact: 1280 },
-    height: { exact: 720 }
+    }//,
+    // width: { exact: 1280 },
+    // height: { exact: 720 }
   }
 };
   // cam = createCapture(constraints, (stream) => {
   // 
   // });
   cam = createCapture(constraints);
+  alert(`width: ${video.width} height: ${video.height}`);
   cam.hide();
 }
 
