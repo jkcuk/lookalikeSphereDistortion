@@ -12,7 +12,7 @@ void main() {
   // float Yboard=atan(tan(PI/9.0)*cos(longitude));
   
   // if ((longitude >= -16.0*PI/81.0) && (longitude <= 16.0*PI/81.0)&& (latitude <= Yboard)&& (latitude >= -Yboard)) {
-  if((abs(zPlaneCoord.x) < 1.0) && (abs(zPlaneCoord.y) < 1.0) {
+  if((abs(zPlaneCoord.x) < 1.0) && (abs(zPlaneCoord.y) < 1.0)) {
     // float transfactlong=(longitude+(16.0*PI/81.0))/(32.0*PI/81.0);
     // float transfactlat=(latitude+Yboard)/(2.0*Yboard);
     // float aflong=mix(0.0,1.0,transfactlong);
