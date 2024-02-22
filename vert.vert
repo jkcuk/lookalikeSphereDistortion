@@ -11,7 +11,7 @@ varying vec2 zPlaneCoord;
 
 void main() {
   // vTexCoord = aTexCoord;
-  zPlaneCoord = aPosition.xy / aPosition.z;
+  zPlaneCoord = aPosition.xy;  // / aPosition.z;  // TODO add this back in
   vec4 positionVec4 = vec4(aPosition, 1.0);
   gl_Position = uProjectionMatrix * uModelViewMatrix * positionVec4;
 }
