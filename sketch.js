@@ -15,10 +15,9 @@ let beta;
 let gamma;
 let textureImg;
 let motion = false;
-let rvx;
-let rvy;
-let rvz;
 let vxSlider;
+let vySlider;
+let vzSlider;
 let fudgeFactorSlider;
 let screenFOVSlider;
 let ff;
@@ -60,22 +59,22 @@ function setup() {
   ff.html(`V1.24`);
 
   vxSlider = createSlider(-1, 1, 0, 0);
-  vxSlider.position(50, 20);
+  vxSlider.position(50, 50);
   vxSlider.size(500);
-  rvx = createInput('0.0','double');
-  rvx.position(50, 67);
   ff2 = createP();
   ff2.position(10,50);
-  ff2.html(`Vx/c:`);
+  ff2.html(`&#946;<sub><i>x</i></sub>=`);
  
-  rvy = createInput('0.0','double');
-  rvy.position(50, 90);
+  vySlider = createSlider(-1, 1, 0, 0);
+  vySlider.position(50, 75);
+  vySlider.size(500);
   ff3 = createP();
   ff3.position(10,75);
   ff3.html(`Vy/c:`);
  
-  rvz = createInput('0.0','double');
-  rvz.position(50, 116);
+  vzSlider = createSlider(-1, 1, 0, 0);
+  vzSlider.position(50, 100);
+  vzSlider.size(500);
   ff4 = createP();
   ff4.position(10,100);
   ff4.html(`Vz/c:`);
@@ -110,8 +109,8 @@ function draw() {
   //background(200); 
  angleMode(DEGREES);
   betax=vxSlider.value();
-  betay=rvy.value();
-  betaz=rvz.value();
+  betay=vySlider.value();
+  betaz=vzSlider.value();
  let beta2=betax*betax+betay*betay+betaz*betaz;
 
   angleMode(RADIANS);
