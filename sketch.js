@@ -20,6 +20,7 @@ let rvy;
 let rvz;
 let vxSlider;
 let fudgeFactorSlider;
+let screenFOVSlider;
 let ff;
 let ff2;
 let ff3;
@@ -27,6 +28,7 @@ let ff4;
 let errorText;
 let aspectRatio;
 let fudgeFactor;
+let screenFOV;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -82,6 +84,9 @@ function setup() {
   fudgeFactorSlider.position(50, 200);
   fudgeFactorSlider.size(windowWidth-100);
 
+  screenFOVSlider = createSlider(-3, 1, 0, 0);
+  screenFOVSlider.position(50, 230);
+  screenFOVSlider.size(windowWidth-100);
 
   errorText = createP();
   errorText.position(400,30);
@@ -138,6 +143,7 @@ function draw() {
   
 // distorted lookalike sphere
  fudgeFactor = Math.pow(10, fudgeFactorSlider.value());
+ screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
   scale(1/gamma, 1/gamma, 1);
@@ -147,6 +153,7 @@ function draw() {
   theShader.setUniform('uTex', cam);
   theShader.setUniform('aspectRatio', aspectRatio);
  theShader.setUniform('fudgeFactor', fudgeFactor);
+ theShader.setUniform('screenFOV', screenFOV);
   resetShader();
   shader(theShader);
   sphere(radius,500);
