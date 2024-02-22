@@ -6,6 +6,7 @@ attribute vec2 aTexCoord;  // not needed
 
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
+uniform float aspectRatio;
 
 varying vec2 zPlaneCoord;
 
