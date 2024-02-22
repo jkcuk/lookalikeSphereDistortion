@@ -79,7 +79,7 @@ function setup() {
   ff4.position(10,140);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
 
-  fudgeFactorSlider = createSlider(-3, 1, -2, 0);
+  fudgeFactorSlider = createSlider(-2, 1, 0, 0);
   fudgeFactorSlider.position(50, windowHeight-100);
   fudgeFactorSlider.size(windowWidth-100);
 
@@ -156,7 +156,7 @@ function draw() {
 
   resetShader();
   shader(theShader);
-  sphere(radius, 24, 24);
+  sphere(radius, 40, 40);
 console.log(theta,phi);
 }
 
