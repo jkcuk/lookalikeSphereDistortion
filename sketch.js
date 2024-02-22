@@ -148,7 +148,7 @@ function draw() {
  theShader.setUniform('fudgeFactor', fudgeFactor);
   resetShader();
   shader(theShader);
-  sphere(radius,200);
+  sphere(radius,500);
 console.log(theta,phi);
 }
 
