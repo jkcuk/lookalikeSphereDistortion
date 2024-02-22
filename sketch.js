@@ -38,7 +38,6 @@ function preload() {
   cam = createCapture(constraints, (stream) => {
    
   });
- if(cam == null) alert("Hi");
   cam.hide();
 }
 
