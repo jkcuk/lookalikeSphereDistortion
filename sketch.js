@@ -54,7 +54,7 @@ function setup() {
   ff.position(0,0);
   ff.html(`V1.24`);
 
-  vxSlider = createSlider(0, 1);
+  vxSlider = createSlider(0, 1, 0, 0);
   vxSlider.position(50, 20);
   vxSlider.size(500);
   rvx = createInput('0.0','double');
