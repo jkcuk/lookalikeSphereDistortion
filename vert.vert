@@ -1,8 +1,8 @@
 precision highp float;
 
 attribute vec3 aPosition;
-// attribute vec3 aNormal;
-// attribute vec2 aTexCoord;
+attribute vec3 aNormal;  // not needed
+attribute vec2 aTexCoord;  // not needed
 
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
