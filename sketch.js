@@ -52,7 +52,7 @@ function setup() {
   ff.position(0,0);
   ff.html(`V1.24`);
 
-  rvx = createInput('0.2','double');
+  rvx = createInput('0.0','double');
   rvx.position(50, 67);
   ff2 = createP();
   ff2.position(10,50);
