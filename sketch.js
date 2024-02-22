@@ -35,9 +35,10 @@ function preload() {
     height: { exact: 720 }
   }
 };
-  cam = createCapture(constraints, (stream) => {
-   
-  });
+  // cam = createCapture(constraints, (stream) => {
+  // 
+  // });
+  cam = createCapture(constraints);
   cam.hide();
 }
 
