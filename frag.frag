@@ -6,7 +6,7 @@ varying vec2 zPlaneCoord;
 uniform sampler2D uTex;
 
 void main() {
-  let float radius=10.0;
+  float radius=10.0;
   // float longitude = mix(-PI, PI, vTexCoord.x);
   // float latitude = mix(-PI/2.0, PI/2.0, vTexCoord.y);
   // float Yboard=atan(tan(PI/9.0)*cos(longitude));
