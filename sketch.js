@@ -156,7 +156,7 @@ function draw() {
 
   resetShader();
   shader(theShader);
-  sphere(radius, 40, 40);
+  sphere(radius, 80, 80);
 console.log(theta,phi);
 }
 
