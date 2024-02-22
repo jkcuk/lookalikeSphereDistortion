@@ -84,7 +84,7 @@ function setup() {
   fudgeFactorSlider.position(50, 200);
   fudgeFactorSlider.size(windowWidth-100);
 
-  screenFOVSlider = createSlider(-3, 1, 0, 0);
+  screenFOVSlider = createSlider(1, 90, 0, 0);
   screenFOVSlider.position(50, 230);
   screenFOVSlider.size(windowWidth-100);
 
@@ -153,7 +153,8 @@ function draw() {
   theShader.setUniform('uTex', cam);
   theShader.setUniform('aspectRatio', aspectRatio);
  theShader.setUniform('fudgeFactor', fudgeFactor);
- theShader.setUniform('screenFOV', screenFOV);
+  perspective(screenFOV*PI/180, width/height, 0.01,50000);
+
   resetShader();
   shader(theShader);
   sphere(radius,500);
