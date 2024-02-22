@@ -23,6 +23,7 @@ let ff2;
 let ff3;
 let ff4;
 let errorText;
+let aspectRatio;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -105,7 +106,8 @@ function draw() {
     THETA1=asin(-betay/r);
    PHI1=PI+atan2(-betax,-betaz);
   }
-    
+
+  aspectRatio=cam.width/cam.height;
   errorText.html(`width: ${cam.width} height: ${cam.height}`);
 
   theta=THETA1; 
@@ -131,6 +133,7 @@ function draw() {
   rotateX(-theta);
   rotateY(-phi);
   theShader.setUniform('uTex', cam);
+  theShader.setUniform('aspectRatio', aspectRatio);
   resetShader();
   shader(theShader);
   sphere(radius,200);
