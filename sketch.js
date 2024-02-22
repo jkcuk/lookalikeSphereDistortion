@@ -34,7 +34,7 @@ function preload() {
   video: {
     facingMode: {
      exact: "environment"
-    }//,
+    },
     width: { exact: 1280 },
     height: { exact: 720 }
   }
