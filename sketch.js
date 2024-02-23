@@ -44,8 +44,12 @@ function preload() {
    height: { ideal: 8192 }
   }
  };
- cameraEnvironment = createCapture(constraintsEnvironment);
- cameraEnvironment.hide();
+ try {
+  cameraEnvironment = createCapture(constraintsEnvironment);
+  cameraEnvironment.hide();
+ } catch(OverconstrainedError) {
+  console.log('No environment-facing camera');
+ }
 
  // user-facing camera
  let constraintsUser = {
