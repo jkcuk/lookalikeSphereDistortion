@@ -3,8 +3,9 @@ let speedtest=1.5;
 let headingtest=50;
 let PHI1=0;
 let THETA1=180; 
-// let cameraUser;
+let cameraUser;
 let cameraEnvironment;
+let videoStreams = [];
 let VelC;
 let betax;
 let betay;
@@ -78,18 +79,18 @@ function setup() {
 
  
  // environment-facing camera
- let constraintsEnvironment = {
-  video: {
-   facingMode: {
+ //let constraintsEnvironment = {
+ // video: {
+ //  facingMode: {
     // exact: "user"
-    ideal: "environment"
-   },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
-  }
- };
- cameraEnvironment = createCapture(constraintsEnvironment, done);
- cameraEnvironment.hide();
+ //   ideal: "environment"
+ //  },    
+ //  width: { ideal: 8192 },
+ //  height: { ideal: 8192 }
+ // }
+ //};
+ //cameraEnvironment = createCapture(constraintsEnvironment, done);
+ //cameraEnvironment.hide();
 
  // user-facing camera
  //let constraintsUser = {
@@ -106,7 +107,10 @@ function setup() {
 
  // console.log(cam.getTracks[0].getCapabilities());
 
-  
+  // Enumerate and create video capture for all available cameras
+  let devices = navigator.mediaDevices.enumerateDevices();
+  devices.then(gotDevices);
+
       
     camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
     noStroke();
@@ -120,6 +124,45 @@ function setup() {
  
 }
 
+function gotDevices(deviceInfos) {
+  for (let deviceInfo of deviceInfos) {
+    if (deviceInfo.kind === 'videoinput') {
+      let constraints = {
+        video: {
+          deviceId: deviceInfo.deviceId,
+          width: { ideal: 6400 }, // full resolution
+          height: { ideal: 4800 } // full resolution
+        }
+      };
+      let videoStream = createCapture(constraints);
+      videoStream.hide();
+      videoStreams.push(videoStream);
+    }
+  }
+
+ // we can deal with a user-facing camera and an environment-facing camera
+
+ // do we have more than one camera?
+ if(videoStreams.length == 1)
+ {
+  // there is only one camera; assume it's user-facing
+  cameraUser = videoStreams[0];
+  cameraEnvironment = null;
+ } else {
+  // assume the camera with the higher resolution is the environment-facing camera
+  if(videoStreams[0].width*videoStreams[0].height > videoStreams[1].width*videoStreams[1].height)
+  {
+   // videoStreams[0] is from the environment-facing camera
+   cameraEnvironment = videoStreams[0];
+   cameraUser = videoStreams[1];
+  } else {
+   // videoStreams[1] is from the environment-facing camera
+   cameraEnvironment = videoStreams[1];
+   cameraUser = videoStreams[0];
+  }
+ }
+}
+
 function done(ms) {
   console.log('MediaStream: '+ms);
   console.log('tracks[0]: '+ms.getVideoTracks()[0]);
@@ -130,6 +173,8 @@ function done(ms) {
 }
 
 function draw() {
+   background(0);
+
   //background(200); 
  angleMode(DEGREES);
   betax=vxSlider.value();
@@ -174,7 +219,7 @@ function draw() {
   rotateX(-theta);
   rotateY(-phi);
   theShader.setUniform('cameraEnvironment', cameraEnvironment);
-  // theShader.setUniform('cameraUser', cameraUser);
+  theShader.setUniform('cameraUser', cameraUser);
   theShader.setUniform('aspectRatio', aspectRatio);
  theShader.setUniform('fudgeFactor', fudgeFactor);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
