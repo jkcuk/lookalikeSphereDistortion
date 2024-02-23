@@ -57,14 +57,14 @@ function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
   // ff = createP();
-  // ff.position(0,0);
+  // ff.position(10, 0);
   // ff.html(`V1.24`);
 
   vxSlider = createSlider(-1, 1, 0, 0);
   vxSlider.position(50, 50);
   vxSlider.size(500);
   ff2 = createP();
-  ff2.position(10,30);
+  ff2.position(10,33);
   ff2.html(`&#946;<sub><i>x</i></sub> =`);
  
   vySlider = createSlider(-1, 1, 0, 0);
@@ -90,7 +90,7 @@ function setup() {
   screenFOVSlider.size(windowWidth-100);
 
   errorText = createP();
-  errorText.position(0, 0);
+  errorText.position(10, 0);
 
 
   
