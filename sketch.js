@@ -88,7 +88,7 @@ function setup() {
    height: { ideal: 8192 }
   }
  };
- cameraEnvironment = createCapture(constraintsEnvironment);
+ cameraEnvironment = createCapture(constraintsEnvironment, done);
  cameraEnvironment.hide();
 
  // user-facing camera
@@ -120,6 +120,11 @@ function setup() {
  
 }
 
+function done(MediaStream ms) {
+ console.log('facing mode: '+ms.getTracks[0].getCapabilities().facingMode);
+//             facing mode: ${cameraEnvironment.getUserMedia().getTracks[0].getCapabilities().facingMode}
+}
+
 function draw() {
   //background(200); 
  angleMode(DEGREES);
@@ -140,7 +145,7 @@ function draw() {
   }
 
   aspectRatio=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height} facing mode: ${cameraEnvironment.getUserMedia().getTracks[0].getCapabilities().facingMode}`);
+  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height}`);
 
   theta=THETA1; 
   phi=PHI1;     
