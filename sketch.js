@@ -120,7 +120,7 @@ function setup() {
  
 }
 
-function done(MediaStream ms) {
+function done(ms) {
  console.log('facing mode: '+ms.getTracks[0].getCapabilities().facingMode);
 //             facing mode: ${cameraEnvironment.getUserMedia().getTracks[0].getCapabilities().facingMode}
 }
