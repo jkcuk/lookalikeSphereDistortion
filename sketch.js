@@ -64,21 +64,21 @@ function setup() {
   vxSlider.position(50, 50);
   vxSlider.size(500);
   ff2 = createP();
-  ff2.position(10,33);
+  ff2.position(10, 50-17);
   ff2.html(`&#946;<sub><i>x</i></sub> =`);
  
   vySlider = createSlider(-1, 1, 0, 0);
   vySlider.position(50, 100);
   vySlider.size(500);
   ff3 = createP();
-  ff3.position(10,90);
+  ff3.position(10,100-17);
   ff3.html(`&#946;<sub><i>y</i></sub> =`);
  
   vzSlider = createSlider(-1, 1, 0, 0);
   vzSlider.position(50, 150);
   vzSlider.size(500);
   ff4 = createP();
-  ff4.position(10,140);
+  ff4.position(10,150-17);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
 
   fudgeFactorSlider = createSlider(-2, 1, 0, 0);
