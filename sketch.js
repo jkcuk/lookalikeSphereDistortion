@@ -1,4 +1,4 @@
-let theShader;
+alet theShader;
 let speedtest=1.5;
 let headingtest=50;
 let PHI1=0;
@@ -35,7 +35,7 @@ function preload() {
   video: {
     facingMode: {
      // exact: "user"
-     exact: "environment"
+     ideal: "environment"
     },
     width: { ideal: 8192 },
     height: { ideal: 8192 }
