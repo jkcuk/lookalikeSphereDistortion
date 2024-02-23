@@ -48,7 +48,7 @@ function preload() {
   // alert(`width: ${cam.width} height: ${cam.height}`);
   cam.hide();
 
- console.log(cam.getTracks[0].getCapabilities());
+ // console.log(cam.getTracks[0].getCapabilities());
 }
 
 
