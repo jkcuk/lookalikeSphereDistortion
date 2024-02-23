@@ -32,39 +32,6 @@ let screenFOV;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
-
- // environment-facing camera
- let constraintsEnvironment = {
-  video: {
-   facingMode: {
-    // exact: "user"
-    exact: "environment"
-   },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
-  }
- };
- try {
-  cameraEnvironment = createCapture(constraintsEnvironment);
-  cameraEnvironment.hide();
- } catch(OverconstrainedError) {
-  console.log('No environment-facing camera');
- }
-
- // user-facing camera
- let constraintsUser = {
-  video: {
-   facingMode: {
-    exact: "user"
-   },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
-  }
- };
- cameraUser = createCapture(constraintsUser);
- cameraUser.hide();
-
- // console.log(cam.getTracks[0].getCapabilities());
 }
 
 
@@ -108,6 +75,36 @@ function setup() {
   errorText = createP();
   errorText.position(10, 0);
 
+
+ 
+ // environment-facing camera
+ let constraintsEnvironment = {
+  video: {
+   facingMode: {
+    // exact: "user"
+    exact: "environment"
+   },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
+  }
+ };
+ cameraEnvironment = createCapture(constraintsEnvironment);
+ cameraEnvironment.hide();
+
+ // user-facing camera
+ let constraintsUser = {
+  video: {
+   facingMode: {
+    exact: "user"
+   },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
+  }
+ };
+ cameraUser = createCapture(constraintsUser);
+ cameraUser.hide();
+
+ // console.log(cam.getTracks[0].getCapabilities());
 
   
       
