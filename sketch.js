@@ -37,8 +37,8 @@ function preload() {
      // exact: "user"
      exact: "environment"
     },
-    width: { ideal: 4096 },
-    height: { ideal: 2160 }
+    width: { ideal: 8192 },
+    height: { ideal: 8192 }
   }
 };
   // cam = createCapture(constraints, (stream) => {
