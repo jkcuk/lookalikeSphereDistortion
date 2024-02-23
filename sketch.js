@@ -138,8 +138,8 @@ function draw() {
    PHI1=PI+atan2(-betax,-betaz);
   }
 
-  aspectRatio=cam.width/cam.height;
-  errorText.html(`width: ${cam.width} height: ${cam.height}`);
+  aspectRatio=cameraEnvironment.width/cameraEnvironment.height;
+  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height}`);
 
   theta=THETA1; 
   phi=PHI1;     
