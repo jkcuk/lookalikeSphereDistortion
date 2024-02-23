@@ -121,6 +121,10 @@ function setup() {
 }
 
 function done(ms) {
+  console.log('MediaStream: '+ms);
+  console.log('tracks[0]: '+ms.getTracks[0]);
+ console.log('capabilities: '+ms.getTracks[0].getCapabilities());
+
  console.log('facing mode: '+ms.getTracks[0].getCapabilities().facingMode);
 //             facing mode: ${cameraEnvironment.getUserMedia().getTracks[0].getCapabilities().facingMode}
 }
