@@ -3,7 +3,8 @@ let speedtest=1.5;
 let headingtest=50;
 let PHI1=0;
 let THETA1=180; 
-let cam;
+let cameraUser;
+let cameraEnvironment;
 let VelC;
 let betax;
 let betay;
@@ -31,22 +32,33 @@ let screenFOV;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
-  let constraints = {
+
+ // environment-facing camera
+ let constraintsEnvironment = {
   video: {
-    facingMode: {
-     // exact: "user"
-     ideal: "environment"
-    },
-    width: { ideal: 8192 },
-    height: { ideal: 8192 }
+   facingMode: {
+    // exact: "user"
+    exact: "environment"
+   },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
   }
-};
-  // cam = createCapture(constraints, (stream) => {
-  // 
-  // });
-  cam = createCapture(constraints);
-  // alert(`width: ${cam.width} height: ${cam.height}`);
-  cam.hide();
+ };
+ cameraEnvironment = createCapture(constraintsEnvironment);
+ cameraEnvironment.hide();
+
+ // user-facing camera
+ let constraintsUser = {
+  video: {
+   facingMode: {
+    exact: "user"
+   },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
+  }
+ };
+ cameraUser = createCapture(constraintsUser);
+ cameraUser.hide();
 
  // console.log(cam.getTracks[0].getCapabilities());
 }
@@ -151,7 +163,8 @@ function draw() {
   translate(0,0,radius*beta);
   rotateX(-theta);
   rotateY(-phi);
-  theShader.setUniform('uTex', cam);
+  theShader.setUniform('cameraEnvironment', cameraEnvironment);
+  theShader.setUniform('cameraUser', cameraUser);
   theShader.setUniform('aspectRatio', aspectRatio);
  theShader.setUniform('fudgeFactor', fudgeFactor);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
