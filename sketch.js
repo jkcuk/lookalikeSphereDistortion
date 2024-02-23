@@ -47,6 +47,8 @@ function preload() {
   cam = createCapture(constraints);
   // alert(`width: ${cam.width} height: ${cam.height}`);
   cam.hide();
+
+ console.log(cam.getTracks[0].getCapabilities());
 }
 
 
