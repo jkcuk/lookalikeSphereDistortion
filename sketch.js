@@ -1,4 +1,4 @@
-alet theShader;
+let theShader;
 let speedtest=1.5;
 let headingtest=50;
 let PHI1=0;
