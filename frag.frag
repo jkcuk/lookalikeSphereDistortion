@@ -1,6 +1,6 @@
 precision highp float;
 
-varying vec2 zPlaneCoord;
+varying vec3 zPlaneCoord;
 uniform sampler2D uTex;
 uniform float aspectRatio;
 uniform float fudgeFactor;
