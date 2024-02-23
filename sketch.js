@@ -83,7 +83,7 @@ function setup() {
   fudgeFactorSlider.position(50, windowHeight-100);
   fudgeFactorSlider.size(windowWidth-100);
 
-  screenFOVSlider = createSlider(1, 90, 90, 0);
+  screenFOVSlider = createSlider(1, 150, 90, 0);
   screenFOVSlider.position(50, windowHeight-50);
   screenFOVSlider.size(windowWidth-100);
 
@@ -98,7 +98,7 @@ function setup() {
   //geolocation
  
   
- perspective(60*PI/180, width/height, 0.01,50000);
+ perspective(90*PI/180, width/height, 0.01,50000);
   //perspective(40*PI/180, width/height, 0.001,500);
   //device orientation
  
