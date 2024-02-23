@@ -7,10 +7,10 @@ attribute vec2 aTexCoord;  // not needed
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
 
-varying vec2 zPlaneCoord;
+varying vec3 zPlaneCoord;
 
 void main() {
-  zPlaneCoord = aPosition.xy / aPosition.z;
+  zPlaneCoord = aPosition / aPosition.z;
   vec4 positionVec4 = vec4(aPosition, 1.0);
   gl_Position = uProjectionMatrix * uModelViewMatrix * positionVec4;
 }
