@@ -140,7 +140,7 @@ function draw() {
   }
 
   aspectRatio=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height}`);
+  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height} facing mode: ${cameraEnvironment.getTracks[0].getCapabilities().facingMode}`);
 
   theta=THETA1; 
   phi=PHI1;     
