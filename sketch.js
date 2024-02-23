@@ -82,7 +82,7 @@ function setup() {
   video: {
    facingMode: {
     // exact: "user"
-    exact: "environment"
+    ideal: "environment"
    },    
    width: { ideal: 8192 },
    height: { ideal: 8192 }
