@@ -3,7 +3,7 @@ let speedtest=1.5;
 let headingtest=50;
 let PHI1=0;
 let THETA1=180; 
-let cameraUser;
+// let cameraUser;
 let cameraEnvironment;
 let VelC;
 let betax;
@@ -92,17 +92,17 @@ function setup() {
  cameraEnvironment.hide();
 
  // user-facing camera
- let constraintsUser = {
-  video: {
-   facingMode: {
-    exact: "user"
-   },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
-  }
- };
- cameraUser = createCapture(constraintsUser);
- cameraUser.hide();
+ //let constraintsUser = {
+ // video: {
+ //  facingMode: {
+ //   exact: "user"
+ // },    
+ //  width: { ideal: 8192 },
+ //  height: { ideal: 8192 }
+ // }
+ //};
+ //cameraUser = createCapture(constraintsUser);
+ //cameraUser.hide();
 
  // console.log(cam.getTracks[0].getCapabilities());
 
@@ -165,7 +165,7 @@ function draw() {
   rotateX(-theta);
   rotateY(-phi);
   theShader.setUniform('cameraEnvironment', cameraEnvironment);
-  theShader.setUniform('cameraUser', cameraUser);
+  // theShader.setUniform('cameraUser', cameraUser);
   theShader.setUniform('aspectRatio', aspectRatio);
  theShader.setUniform('fudgeFactor', fudgeFactor);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
