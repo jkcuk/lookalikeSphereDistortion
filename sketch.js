@@ -146,7 +146,7 @@ function draw() {
   phi=PHI1;     
 
  if (beta2 >=1 ){
-  const contentString = "Beta is >= 1! normalising it to 0.99";
+  const contentString = "Beta >= 1, setting it to 0.99";
   errorText.html(contentString.fontcolor("red")); 
   
   beta = 0.99; 
