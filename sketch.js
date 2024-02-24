@@ -58,18 +58,18 @@ function setup() {
   ff3.position(10,100-17);
   ff3.html(`&#946;<sub><i>y</i></sub> =`);
  
-  vzSlider = createSlider(-1, 1, 0, 0);
+  vzSlider = createSlider(-1, 1, 0.8, 0);
   vzSlider.position(50, 150);
   vzSlider.size(500);
   ff4 = createP();
   ff4.position(10,150-17);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
 
-  fudgeFactorSlider = createSlider(-2, 1, 0, 0);
+  fudgeFactorSlider = createSlider(-2, 1, 0.5, 0);
   fudgeFactorSlider.position(50, windowHeight-100);
   fudgeFactorSlider.size(windowWidth-100);
 
-  screenFOVSlider = createSlider(1, 150, 90, 0);
+  screenFOVSlider = createSlider(1, 150, 150, 0);
   screenFOVSlider.position(50, windowHeight-50);
   screenFOVSlider.size(windowWidth-100);
 
