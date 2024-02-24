@@ -27,7 +27,7 @@ let screenFOVSlider;
 //let ff3;
 //let ff4;
 let errorText;
-let aspectRatio;
+let aspectRatioUser, aspectRatioEnvironment;
 let fudgeFactor;
 let screenFOV;
 
@@ -185,24 +185,7 @@ function draw() {
   betaz=vzSlider.value();
  let beta2=betax*betax+betay*betay+betaz*betaz;
 
-  angleMode(RADIANS);
-  //transform to theta and phi
-  beta=sqrt(beta2);
-  if (beta===0){
-    THETA1=0
-    PH1=0;
-  }else{
-    THETA1=asin(-betay/beta);
-   PHI1=PI+atan2(-betax,-betaz);
-  }
-
-  aspectRatio=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`width: ${cameraEnvironment.width} height: ${cameraEnvironment.height}`);
-
-  theta=THETA1; 
-  phi=PHI1;     
-
- if (beta2 >=1 ){
+  if (beta2 >=1 ){
   const contentString = "Beta >= 1, setting it to 0.99";
   errorText.html(contentString.fontcolor("red")); 
   
@@ -212,6 +195,24 @@ function draw() {
  }
   gamma=1/Math.sqrt(1-beta2);
   
+
+  angleMode(RADIANS);
+  //transform to theta and phi
+  if (beta===0){
+    THETA1=0
+    PH1=0;
+  }else{
+    THETA1=asin(-betay/beta);
+   PHI1=PI+atan2(-betax,betaz);
+  }
+
+  if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
+  if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
+  errorText.html(`environment camera: ${cameraEnvironment.width} x ${cameraEnvironment.height}, user camera: ${cameraUser.width} x ${cameraUser.height}`);
+
+  theta=THETA1; 
+  phi=PHI1;     
+
 // distorted lookalike sphere
  fudgeFactor = Math.pow(10, fudgeFactorSlider.value());
  screenFOV = screenFOVSlider.value();
@@ -223,7 +224,8 @@ function draw() {
   rotateY(-phi);
   theShader.setUniform('cameraEnvironment', cameraEnvironment);
   theShader.setUniform('cameraUser', cameraUser);
-  theShader.setUniform('aspectRatio', aspectRatio);
+  theShader.setUniform('aspectRatioUser', aspectRatioUser);
+  theShader.setUniform('aspectRatioEnvironment', aspectRatioEnvironment);
  theShader.setUniform('fudgeFactor', fudgeFactor);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
 
