@@ -82,10 +82,10 @@ function setup() {
  let constraintsUser = {
   video: {
    facingMode: {
-    exact: "user"
+    ideal: "user"
   },    
-   width: { ideal: 2048 },
-   height: { ideal: 2048 }
+   width: { ideal: 4096 },
+   height: { ideal: 3072 }
   }
  };
  cameraUser = createCapture(constraintsUser);
@@ -95,11 +95,11 @@ function setup() {
  let constraintsEnvironment = {
   video: {
    facingMode: {
-    exact: "environment"
-    //ideal: "environment"
+    // exact: "environment"
+    ideal: "environment"
    },    
-   width: { ideal: 2048 },
-   height: { ideal: 2048 }
+   width: { ideal: 4096 },
+   height: { ideal: 3072 }
   }
  };
  cameraEnvironment = createCapture(constraintsEnvironment, done);
