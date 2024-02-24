@@ -147,7 +147,7 @@ function gotDevices(deviceInfos) {
  {
   // there is only one camera; assume it's user-facing
   cameraUser = videoStreams[0];
-  // cameraEnvironment = null; // leave undefined
+  cameraEnvironment = null; // leave undefined
  } else {
   // assume the camera with the higher resolution is the environment-facing camera
   if(videoStreams[0].width*videoStreams[0].height > videoStreams[1].width*videoStreams[1].height)
