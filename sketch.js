@@ -142,7 +142,7 @@ function gotDevices(deviceInfos) {
 
  // we can deal with a user-facing camera and an environment-facing camera
 
- console.log('video streams: '+videoStreams.length);
+ alert('video streams: '+videoStreams.length);
  
  // do we have more than one camera?
  if(videoStreams.length == 1)
