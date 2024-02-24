@@ -79,38 +79,39 @@ function setup() {
 
  
  // environment-facing camera
- //let constraintsEnvironment = {
- // video: {
- //  facingMode: {
-    // exact: "user"
- //   ideal: "environment"
- //  },    
- //  width: { ideal: 8192 },
- //  height: { ideal: 8192 }
- // }
- //};
- //cameraEnvironment = createCapture(constraintsEnvironment, done);
- //cameraEnvironment.hide();
+ let constraintsEnvironment = {
+  video: {
+   facingMode: {
+    exact: "environment"
+    //ideal: "environment"
+   },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
+  }
+ };
+ cameraEnvironment = createCapture(constraintsEnvironment, done);
+ cameraEnvironment.hide();
 
  // user-facing camera
- //let constraintsUser = {
- // video: {
- //  facingMode: {
- //   exact: "user"
- // },    
- //  width: { ideal: 8192 },
- //  height: { ideal: 8192 }
- // }
- //};
- //cameraUser = createCapture(constraintsUser);
- //cameraUser.hide();
+ let constraintsUser = {
+  video: {
+   facingMode: {
+    exact: "user"
+  },    
+   width: { ideal: 8192 },
+   height: { ideal: 8192 }
+  }
+ };
+ cameraUser = createCapture(constraintsUser);
+ cameraUser.hide();
 
  // console.log(cam.getTracks[0].getCapabilities());
 
+ /*
   // Enumerate and create video capture for all available cameras
   let devices = navigator.mediaDevices.enumerateDevices();
   devices.then(gotDevices);
-
+ */
       
     camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
     noStroke();
