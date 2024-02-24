@@ -78,7 +78,20 @@ function setup() {
 
 
  
- // environment-facing camera
+ // user-facing camera
+ let constraintsUser = {
+  video: {
+   facingMode: {
+    exact: "user"
+  },    
+   width: { ideal: 2048 },
+   height: { ideal: 2048 }
+  }
+ };
+ cameraUser = createCapture(constraintsUser);
+ cameraUser.hide();
+
+  // environment-facing camera
  let constraintsEnvironment = {
   video: {
    facingMode: {
@@ -92,18 +105,6 @@ function setup() {
  cameraEnvironment = createCapture(constraintsEnvironment, done);
  cameraEnvironment.hide();
 
- // user-facing camera
- let constraintsUser = {
-  video: {
-   facingMode: {
-    exact: "user"
-  },    
-   width: { ideal: 2048 },
-   height: { ideal: 2048 }
-  }
- };
- cameraUser = createCapture(constraintsUser);
- cameraUser.hide();
 
  // console.log(cam.getTracks[0].getCapabilities());
 
