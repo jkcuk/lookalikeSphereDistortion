@@ -85,8 +85,8 @@ function setup() {
     exact: "environment"
     //ideal: "environment"
    },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
+   width: { ideal: 2048 },
+   height: { ideal: 2048 }
   }
  };
  cameraEnvironment = createCapture(constraintsEnvironment, done);
@@ -98,8 +98,8 @@ function setup() {
    facingMode: {
     exact: "user"
   },    
-   width: { ideal: 8192 },
-   height: { ideal: 8192 }
+   width: { ideal: 2048 },
+   height: { ideal: 2048 }
   }
  };
  cameraUser = createCapture(constraintsUser);
