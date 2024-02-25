@@ -70,7 +70,7 @@ function setup() {
   cameraFOVSlider.position(50, windowHeight-100);
   cameraFOVSlider.size(windowWidth-100);
 
-  screenFOVSlider = createSlider(1, 150, 150, 0);
+  screenFOVSlider = createSlider(1, 150, 90, 0);
   screenFOVSlider.position(50, windowHeight-50);
   screenFOVSlider.size(windowWidth-100);
 
