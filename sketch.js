@@ -20,7 +20,7 @@ let gamma;
 let vxSlider;
 let vySlider;
 let vzSlider;
-let fudgeFactorSlider;
+let cameraFOVSlider;
 let screenFOVSlider;
 //let ff;
 //let ff2;
@@ -66,9 +66,9 @@ function setup() {
   ff4.position(10,150-17);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
 
-  fudgeFactorSlider = createSlider(-2, 1, 1, 0);
-  fudgeFactorSlider.position(50, windowHeight-100);
-  fudgeFactorSlider.size(windowWidth-100);
+  cameraFOVSlider = createSlider(10, 150, 90, 0);
+  cameraFOVSlider.position(50, windowHeight-100);
+  cameraFOVSlider.size(windowWidth-100);
 
   screenFOVSlider = createSlider(1, 150, 150, 0);
   screenFOVSlider.position(50, windowHeight-50);
@@ -84,7 +84,7 @@ function setup() {
   button.mousePressed(() => {
     var fovString = prompt("User camera FOV (°):", "10");
     var fov = float(fovString);
-    if(!isNaN(fov)) fudgeFactorSlider.value(0);
+    if(!isNaN(fov)) cameraFOVSlider.value(fov);
   });
 
  tofOnlyCheckbox = createCheckbox();
@@ -227,7 +227,7 @@ function draw() {
   phi=PHI1;     
 
 // distorted lookalike sphere
- fudgeFactor = Math.pow(10, fudgeFactorSlider.value());
+ fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
  screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
