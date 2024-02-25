@@ -84,7 +84,7 @@ function setup() {
   button.mousePressed(() => {
     var fovString = prompt("User camera FOV (°):", "10");
     var fov = float(fovString);
-    if(!isNaN(fov)) fudgeFactorSlider.setValue(0);
+    if(!isNaN(fov)) fudgeFactorSlider.value(0);
   });
 
  tofOnlyCheckbox = createCheckbox();
