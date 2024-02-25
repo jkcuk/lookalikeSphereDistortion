@@ -88,6 +88,14 @@ button.addEventListener ("click", function() {
   alert("did something");
 });
 
+ let button = createButton('click me');
+  button.position(0, 100);
+
+  // Use the button to change the background color.
+  button.mousePressed(() => {
+    let g = random(255);
+    background(g);
+  });
  
  // user-facing camera
  let constraintsUser = {
