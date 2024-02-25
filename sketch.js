@@ -12,7 +12,7 @@ let betay;
 let betaz;
 let phi=0;
 let theta=0;
-let radius=10;//200;
+// let radius=10;//200;
 let beta;
 let gamma;
 //let textureImg;
@@ -226,7 +226,7 @@ function draw() {
   rotateY(phi);
   rotateX(theta);
   scale(1/gamma, 1/gamma, 1);
-  translate(0,0,radius*beta);
+  translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
   theShader.setUniform('cameraEnvironment', cameraEnvironment);
@@ -238,7 +238,7 @@ function draw() {
 
   resetShader();
   shader(theShader);
-  sphere(radius, 200, 200);
+  sphere(1 /* radius */, 200, 200);
 // console.log(theta,phi);
 }
 
