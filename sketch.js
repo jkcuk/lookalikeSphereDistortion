@@ -82,7 +82,7 @@ function setup() {
 
   // Use the button to change the background color.
   button.mousePressed(() => {
-    var fovString = prompt("User camera FOV (°):", "10");
+    var fovString = prompt("User camera FOV (°):", String(cameraFOVSlider.value()));
     var fov = float(fovString);
     if(!isNaN(fov)) cameraFOVSlider.value(fov);
   });
