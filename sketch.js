@@ -76,25 +76,12 @@ function setup() {
   errorText = createP();
   errorText.position(10, 0);
 
-var button = document.createElement("button");
-button.innerHTML = "Do Something";
-
-// 2. Append somewhere
-var body = document.getElementsByTagName("body")[0];
-body.appendChild(button);
-
-// 3. Add event handler
-button.addEventListener ("click", function() {
-  alert("did something");
-});
-
- let button2 = createButton('click me');
-  button2.position(0, 100);
+ let button = createButton('set user camera FOV');
+  button.position(50, windowHeight-100);
 
   // Use the button to change the background color.
-  button2.mousePressed(() => {
-    let g = random(255);
-    background(g);
+  button.mousePressed(() => {
+    var fov = prompt("User camera FOV (°):", "10");
   });
  
  // user-facing camera
