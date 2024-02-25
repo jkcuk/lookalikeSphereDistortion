@@ -88,11 +88,11 @@ button.addEventListener ("click", function() {
   alert("did something");
 });
 
- let button = createButton('click me');
-  button.position(0, 100);
+ let button2 = createButton('click me');
+  button2.position(0, 100);
 
   // Use the button to change the background color.
-  button.mousePressed(() => {
+  button2.mousePressed(() => {
     let g = random(255);
     background(g);
   });
