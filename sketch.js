@@ -30,6 +30,7 @@ let errorText;
 let aspectRatioUser, aspectRatioEnvironment;
 let fudgeFactor;
 let screenFOV;
+let tofOnlyCheckbox;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -83,6 +84,9 @@ function setup() {
   button.mousePressed(() => {
     var fov = prompt("User camera FOV (°):", "10");
   });
+
+ tofOnlyCheckbox = createCheckbox();
+  tofOnlyCheckbox.position(50, 200);
  
  // user-facing camera
  let constraintsUser = {
@@ -225,7 +229,7 @@ function draw() {
  screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
-  scale(1/gamma, 1/gamma, 1);
+  if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
