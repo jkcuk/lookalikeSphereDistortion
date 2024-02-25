@@ -82,7 +82,9 @@ function setup() {
 
   // Use the button to change the background color.
   button.mousePressed(() => {
-    var fov = prompt("User camera FOV (°):", "10");
+    var fovString = prompt("User camera FOV (°):", "10");
+    var fov = float(fovString);
+    if(!isNaN(fov)) fudgeFactorSlider.setValue(0);
   });
 
  tofOnlyCheckbox = createCheckbox();
