@@ -23,7 +23,7 @@ let cameraFOVSlider;
 let screenFOVSlider;
 let status;
 let aspectRatioUser, aspectRatioEnvironment;
-let fudgeFactor;
+let horizontalFovUser, horizontalFovEnvironment;
 let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox;
 
@@ -33,6 +33,10 @@ function preload() {
 
 
 function setup() {  
+  screen.addEventListener("orientationchange", () => {
+    console.log(`The orientation of the screen is: ${screen.orientation}`);
+  });
+  
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
   betaxSlider = createSlider(-1, 1, 0, 0);
@@ -173,7 +177,8 @@ function draw() {
   status.html(`v1.2 environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
   // distorted lookalike sphere
-  fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
+  horizontalFovUser = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
+  horizontalFovEnvironment = horizontalFovUser; // TODO
   screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
@@ -185,7 +190,8 @@ function draw() {
   theShader.setUniform('cameraUser', cameraUser);
   theShader.setUniform('aspectRatioUser', aspectRatioUser);
   theShader.setUniform('aspectRatioEnvironment', aspectRatioEnvironment);
-  theShader.setUniform('fudgeFactor', fudgeFactor);
+  theShader.setUniform('horizontalFovUser', horizontalFovUser);
+  theShader.setUniform('horizontalFovEnvironment', horizontalFovEnvironment);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
 
   resetShader();
