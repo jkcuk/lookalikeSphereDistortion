@@ -1,8 +1,7 @@
 let theShader;
 
 // the cameras
-let cameraUser;
-let cameraEnvironment;
+let cameraU, cameraE; // user-facing / environment-facing camera
 
 // components of beta...
 let betax;
@@ -22,8 +21,9 @@ let betazSlider;
 let cameraFOVSlider;
 let screenFOVSlider;
 let status;
-let aspectRatioUser, aspectRatioEnvironment;
-let horizontalFovUser, horizontalFovEnvironment;
+let aspectRatioU, aspectRatioE; // aspect ratio (= width / height) for user-facing / environment-facing camera
+let tanHalfFovHU, tanHalfFovVU; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for user-facing camera
+let tanHalfFovHE, tanHalfFovVE; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for environment-facing camera
 let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox;
 
@@ -33,10 +33,13 @@ function preload() {
 
 
 function setup() {  
+  screen.addEventListener("orientationchange", createVideoStreams);
+  /*
   screen.addEventListener("orientationchange", () => {
     console.log(`The orientation of the screen is: ${screen.orientation}`);
   });
-  
+  */
+
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
   betaxSlider = createSlider(-1, 1, 0, 0);
@@ -100,6 +103,7 @@ function setup() {
   perspective(90*PI/180, width/height, 0.01,50000);
 }
 
+/** run this whenever the resolution or screen orientation changes */
 function createVideoStreams() {
   let idealWidth, idealHeight;
   if(highResolutionCheckbox.checked()) {
@@ -111,7 +115,7 @@ function createVideoStreams() {
   }
   
   // user-facing camera
-  let constraintsUser = {
+  let constraintsU = {
     video: {
       facingMode: {
       ideal: "user"
@@ -120,11 +124,11 @@ function createVideoStreams() {
     height: { ideal: idealHeight }
   }
  };
- cameraUser = createCapture(constraintsUser);
- cameraUser.hide();
+ cameraU = createCapture(constraintsU);
+ cameraU.hide();
 
   // environment-facing camera
-  let constraintsEnvironment = {
+  let constraintsE = {
     video: {
       facingMode: {
         // exact: "environment"
@@ -134,8 +138,8 @@ function createVideoStreams() {
       height: { ideal: idealHeight }
     }
   };
-  cameraEnvironment = createCapture(constraintsEnvironment);
-  cameraEnvironment.hide();
+  cameraE = createCapture(constraintsE);
+  cameraE.hide();
 }
 
 function draw() {
@@ -172,14 +176,24 @@ function draw() {
     phi=PI+atan2(-betax,betaz);
   }
 
-  if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
-  if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
-  status.html(`v1.2 environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
+  aspectRatioU = cameraU.width/cameraU.height;
+  aspectRatioE = cameraE.width/cameraE.height;
+  status.html(`v1.2 environment camera: ${cameraE.width}x${cameraE.height}, user camera: ${cameraU.width}x${cameraU.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
+
+  let tanHalfWiderFovU = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
+  if(aspectRatioU > 1.0) {
+    // the horizontal FOV is wider
+    tanHalfFovHU = tanHalfWiderFovU;
+    tanHalfFovVU = tanHalfWiderFovU / aspectRatioU;
+  } else {
+    // the vertical FOV is wider
+    tanHalfFovVU = tanHalfWiderFovU;
+    tanHalfFovHU = tanHalfWiderFovU / aspectRatioU;
+  }
+  
+  screenFOV = screenFOVSlider.value();
 
   // distorted lookalike sphere
-  horizontalFovUser = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
-  horizontalFovEnvironment = horizontalFovUser; // TODO
-  screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
   if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
@@ -188,10 +202,10 @@ function draw() {
   rotateY(-phi);
   theShader.setUniform('cameraEnvironment', cameraEnvironment);
   theShader.setUniform('cameraUser', cameraUser);
-  theShader.setUniform('aspectRatioUser', aspectRatioUser);
-  theShader.setUniform('aspectRatioEnvironment', aspectRatioEnvironment);
-  theShader.setUniform('horizontalFovUser', horizontalFovUser);
-  theShader.setUniform('horizontalFovEnvironment', horizontalFovEnvironment);
+  theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
+  theShader.setUniform('tanHalfFovVU', tanHalfFovVU);
+  theShader.setUniform('tanHalfFovHE', tanHalfFovHU);
+  theShader.setUniform('tanHalfFovVE', tanHalfFovVU);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
 
   resetShader();
