@@ -108,10 +108,10 @@ function createVideoStreams() {
   let idealWidth, idealHeight;
   if(highResolutionCheckbox.checked()) {
     idealWidth = 4096;
-    idealHeight = 3072;
+    idealHeight = 4096; // 3072;
   } else {
     idealWidth = 1024;
-    idealHeight =768;
+    idealHeight = 1024; // 768;
   }
   
   // user-facing camera
