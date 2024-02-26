@@ -2,10 +2,8 @@ precision highp float;
 
 varying vec2 zPlaneCoord;
 varying float aPositionZ;
-uniform sampler2D cameraEnvironment;
-uniform sampler2D cameraUser;
-uniform float aspectRatioUser;
-uniform float aspectRatioEnvironment;
+uniform sampler2D cameraE;
+uniform sampler2D cameraU;
 uniform float tanHalfFovHU;
 uniform float tanHalfFovVU;
 uniform float tanHalfFovHE;

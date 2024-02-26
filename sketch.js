@@ -200,8 +200,8 @@ function draw() {
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
-  theShader.setUniform('cameraEnvironment', cameraEnvironment);
-  theShader.setUniform('cameraUser', cameraUser);
+  theShader.setUniform('cameraE', cameraE);
+  theShader.setUniform('cameraU', cameraU);
   theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
   theShader.setUniform('tanHalfFovVU', tanHalfFovVU);
   theShader.setUniform('tanHalfFovHE', tanHalfFovHU);
