@@ -82,15 +82,26 @@ function setup() {
 
   highResolutionCheckbox = createCheckbox();
   highResolutionCheckbox.position(80, 200);
+  
+  var checkbox = document.querySelector("input[name=checkbox]");
+  checkbox.position(110, 200);
+
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+     console.log("Checkbox is checked..");
+    } else {
+      console.log("Checkbox is not checked..");
+    }
+  });
  
   // user-facing camera
   let constraintsUser = {
-  video: {
-   facingMode: {
-    ideal: "user"
-  },    
-   width: { ideal: 4096 },
-   height: { ideal: 3072 }
+    video: {
+      facingMode: {
+      ideal: "user"
+    },    
+    width: { ideal: 4096 },
+    height: { ideal: 3072 }
   }
  };
  cameraUser = createCapture(constraintsUser);
