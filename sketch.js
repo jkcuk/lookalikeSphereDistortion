@@ -86,12 +86,8 @@ function setup() {
   //var checkbox = document.querySelector("input[name=checkbox]");
   //checkbox.position(110, 200);
 
-  highResolutionCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-     console.log("Checkbox is checked..");
-    } else {
-      console.log("Checkbox is not checked..");
-    }
+  highResolutionCheckbox.mouseClicked(function() {
+    console.log("Checkbox");
   });
  
   // user-facing camera
