@@ -86,18 +86,34 @@ function setup() {
   //var checkbox = document.querySelector("input[name=checkbox]");
   //checkbox.position(110, 200);
 
-  highResolutionCheckbox.mouseClicked(function() {
-    console.log("Checkbox");
-  });
+  highResolutionCheckbox.mouseClicked(createVideoStreams);
+
+  createVideoStreams();
  
+  camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+  noStroke();
+  
+  perspective(90*PI/180, width/height, 0.01,50000);
+}
+
+function createVideoStreams() {
+  let idealWidth, idealHeight;
+  if(highResolutionCheckbox.checked()) {
+    idealWidth = 4096;
+    idealHeight = 3072;
+  } else {
+    idealWidth = 1024;
+    idealHeight =768;
+  }
+  
   // user-facing camera
   let constraintsUser = {
     video: {
       facingMode: {
       ideal: "user"
     },    
-    width: { ideal: 4096 },
-    height: { ideal: 3072 }
+    width: { ideal: idealWidth },
+    height: { ideal: idealHeight }
   }
  };
  cameraUser = createCapture(constraintsUser);
@@ -110,17 +126,12 @@ function setup() {
         // exact: "environment"
         ideal: "environment"
       },    
-      width: { ideal: 4096 },
-      height: { ideal: 3072 }
+      width: { ideal: idealWidth },
+      height: { ideal: idealHeight }
     }
   };
   cameraEnvironment = createCapture(constraintsEnvironment);
   cameraEnvironment.hide();
-      
-  camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
-  noStroke();
-  
-  perspective(90*PI/180, width/height, 0.01,50000);
 }
 
 function draw() {
@@ -180,7 +191,7 @@ function draw() {
   resetShader();
   shader(theShader);
   if(highResolutionCheckbox.checked()) sphere(1, 200, 200);
-  else sphere(1);
+  else sphere(1, 50, 50);
   // console.log(theta,phi);
 }
 
