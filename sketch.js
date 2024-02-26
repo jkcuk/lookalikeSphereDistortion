@@ -84,7 +84,7 @@ function setup() {
   highResolutionCheckbox.position(80, 200);
   
   var checkbox = document.querySelector("input[name=checkbox]");
-  // checkbox.position(110, 200);
+  checkbox.position(110, 200);
 
   checkbox.addEventListener('change', function() {
     if (this.checked) {
@@ -163,7 +163,7 @@ function draw() {
 
   if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
   if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
-  status.html(`v1.0 environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
+  status.html(`v1.1 environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
   // distorted lookalike sphere
   fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
