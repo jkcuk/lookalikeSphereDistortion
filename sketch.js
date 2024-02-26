@@ -83,10 +83,10 @@ function setup() {
   highResolutionCheckbox = createCheckbox();
   highResolutionCheckbox.position(80, 200);
   
-  var checkbox = document.querySelector("input[name=checkbox]");
-  checkbox.position(110, 200);
+  //var checkbox = document.querySelector("input[name=checkbox]");
+  //checkbox.position(110, 200);
 
-  checkbox.addEventListener('change', function() {
+  highResolutionCheckbox.addEventListener('change', function() {
     if (this.checked) {
      console.log("Checkbox is checked..");
     } else {
