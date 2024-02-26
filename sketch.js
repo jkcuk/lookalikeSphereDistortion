@@ -119,21 +119,21 @@ function setup() {
 function draw() {
    background(0);
 
- angleMode(DEGREES);
+ // angleMode(DEGREES);
   betax=betaxSlider.value();
   betay=betaySlider.value();
   betaz=betazSlider.value();
  let beta2=betax*betax+betay*betay+betaz*betaz;
 
   if (beta2 >=1 ){
-   const contentString = "Beta >= 1, setting it to 0.99";
-   errorText.html(contentString.fontcolor("red")); 
-
    beta0 = sqrt(beta2);
    beta = 0.99; 
    betax *= beta/beta0;
    betay *= beta/beta0;
    betaz *= beta/beta0;
+   
+   const contentString = "Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))";
+   errorText.html(contentString.fontcolor("red")); 
  } else{
   beta=sqrt(beta2);
  }
