@@ -178,7 +178,7 @@ function draw() {
 
   aspectRatioU = cameraU.width/cameraU.height;
   aspectRatioE = cameraE.width/cameraE.height;
-  status.html(`v1.2 environment camera: ${cameraE.width}x${cameraE.height}, user camera: ${cameraU.width}x${cameraU.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
+  status.html(`v1.3 environment camera: ${cameraE.width}x${cameraE.height}, user camera: ${cameraU.width}x${cameraU.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
   let tanHalfWiderFovU = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
   if(aspectRatioU > 1.0) {
@@ -188,7 +188,7 @@ function draw() {
   } else {
     // the vertical FOV is wider
     tanHalfFovVU = tanHalfWiderFovU;
-    tanHalfFovHU = tanHalfWiderFovU / aspectRatioU;
+    tanHalfFovHU = tanHalfWiderFovU * aspectRatioU;
   }
   
   screenFOV = screenFOVSlider.value();
