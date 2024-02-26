@@ -107,7 +107,7 @@ function setup() {
    height: { ideal: 3072 }
   }
  };
- cameraEnvironment = createCapture(constraintsEnvironment, done);
+ cameraEnvironment = createCapture(constraintsEnvironment);
  cameraEnvironment.hide();
       
     camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
