@@ -15,8 +15,6 @@ let gamma;
 // direction of beta
 let phi=0;
 let theta=0;
-let PHI1=0;
-let THETA1=180;
 
 let betaxSlider;
 let betaySlider;
@@ -35,7 +33,6 @@ function preload() {
 
 
 function setup() {  
- 
   createCanvas(windowWidth, windowHeight, WEBGL); 
 
   betaxSlider = createSlider(-1, 1, 0, 0);
@@ -70,7 +67,7 @@ function setup() {
   errorText = createP();
   errorText.position(10, 0);
 
- let button = createButton('set user camera FOV');
+  let button = createButton('set user camera FOV');
   button.position(50, windowHeight-100);
 
   // Use the button to change the background color.
@@ -80,11 +77,11 @@ function setup() {
     if(!isNaN(fov)) cameraFOVSlider.value(fov);
   });
 
- tofOnlyCheckbox = createCheckbox();
+  tofOnlyCheckbox = createCheckbox();
   tofOnlyCheckbox.position(50, 200);
  
- // user-facing camera
- let constraintsUser = {
+  // user-facing camera
+  let constraintsUser = {
   video: {
    facingMode: {
     ideal: "user"
@@ -97,70 +94,66 @@ function setup() {
  cameraUser.hide();
 
   // environment-facing camera
- let constraintsEnvironment = {
-  video: {
-   facingMode: {
-    // exact: "environment"
-    ideal: "environment"
-   },    
-   width: { ideal: 4096 },
-   height: { ideal: 3072 }
-  }
- };
- cameraEnvironment = createCapture(constraintsEnvironment);
- cameraEnvironment.hide();
+  let constraintsEnvironment = {
+    video: {
+      facingMode: {
+        // exact: "environment"
+        ideal: "environment"
+      },    
+      width: { ideal: 4096 },
+      height: { ideal: 3072 }
+    }
+  };
+  cameraEnvironment = createCapture(constraintsEnvironment);
+  cameraEnvironment.hide();
       
-    camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
-    noStroke();
+  camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+  noStroke();
   
- perspective(90*PI/180, width/height, 0.01,50000);
+  perspective(90*PI/180, width/height, 0.01,50000);
 }
 
 function draw() {
    background(0);
 
- // angleMode(DEGREES);
+  // angleMode(DEGREES);
   betax=betaxSlider.value();
   betay=betaySlider.value();
   betaz=betazSlider.value();
- let beta2=betax*betax+betay*betay+betaz*betaz;
+  let beta2=betax*betax+betay*betay+betaz*betaz;
 
   if (beta2 >=1 ){
-   beta0 = sqrt(beta2);
-   beta = 0.99; 
-   betax *= beta/beta0;
-   betay *= beta/beta0;
-   betaz *= beta/beta0;
+    beta0 = sqrt(beta2);
+    beta = 0.99; 
+    betax *= beta/beta0;
+    betay *= beta/beta0;
+    betaz *= beta/beta0;
 
-   console.log("Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))");
-   const contentString = "Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))";
-   errorText.html(contentString.fontcolor("red")); 
- } else{
-  beta=sqrt(beta2);
- }
+    console.log("Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))");
+    // const contentString = "Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))";
+    // errorText.html(contentString.fontcolor("red")); 
+  } else{
+    beta=sqrt(beta2);
+  }
   gamma=1/Math.sqrt(1-beta2);
   
-
   angleMode(RADIANS);
   //transform to theta and phi
   if (beta===0){
-    THETA1=0
-    PH1=0;
-  }else{
-    THETA1=asin(-betay/beta);
-   PHI1=PI+atan2(-betax,betaz);
+    theta=0
+    phi=0;
+  } else {
+    theta=asin(-betay/beta);
+    phi=PI+atan2(-betax,betaz);
   }
 
   if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
   if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`environment camera: ${cameraEnvironment.width} x ${cameraEnvironment.height}, user camera: ${cameraUser.width} x ${cameraUser.height}`);
+  errorText.html(`environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (${betax}, ${betay}, ${betaz})`);
 
-  theta=THETA1; 
-  phi=PHI1;     
-
-// distorted lookalike sphere
- fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
- screenFOV = screenFOVSlider.value();
+  // distorted lookalike sphere
+  fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
+  screenFOV = screenFOVSlider.value();
   rotateY(phi);
   rotateX(theta);
   if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
@@ -171,16 +164,14 @@ function draw() {
   theShader.setUniform('cameraUser', cameraUser);
   theShader.setUniform('aspectRatioUser', aspectRatioUser);
   theShader.setUniform('aspectRatioEnvironment', aspectRatioEnvironment);
- theShader.setUniform('fudgeFactor', fudgeFactor);
+  theShader.setUniform('fudgeFactor', fudgeFactor);
   perspective(screenFOV*PI/180, width/height, 0.01,50000);
 
   resetShader();
   shader(theShader);
   sphere(1 /* radius */, 200, 200);
-// console.log(theta,phi);
+  // console.log(theta,phi);
 }
-
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
