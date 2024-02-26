@@ -25,7 +25,7 @@ let status;
 let aspectRatioUser, aspectRatioEnvironment;
 let fudgeFactor;
 let screenFOV;
-let tofOnlyCheckbox;
+let tofOnlyCheckbox, highResolutionCheckbox;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -79,6 +79,9 @@ function setup() {
 
   tofOnlyCheckbox = createCheckbox();
   tofOnlyCheckbox.position(50, 200);
+
+  highResolutionCheckbox = createCheckbox();
+  highResolutionCheckbox.position(80, 200);
  
   // user-facing camera
   let constraintsUser = {
@@ -169,7 +172,8 @@ function draw() {
 
   resetShader();
   shader(theShader);
-  sphere(1 /* radius */, 200, 200);
+  if(highResolutionCheckbox.checked()) sphere(1, 200, 200);
+  else sphere(1);
   // console.log(theta,phi);
 }
 
