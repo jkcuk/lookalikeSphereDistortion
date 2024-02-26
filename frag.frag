@@ -19,8 +19,8 @@ void main() {
     }
   } else {
     // user-facing camera
-    if((abs(zPlaneCoord.x) < fudgeFactor*aspectRatioUser) && (abs(zPlaneCoord.y) < fudgeFactor)) {
-      gl_FragColor = texture2D(cameraUser, vec2(0.5+0.5*zPlaneCoord.x/(fudgeFactor*aspectRatioUser), 0.5+0.5*zPlaneCoord.y/fudgeFactor));
+    if((abs(zPlaneCoord.x) < horizontalFovUser) && (abs(zPlaneCoord.y) < horizontalFovUser/aspectRatioUser)) {
+      gl_FragColor = texture2D(cameraUser, vec2(0.5+0.5*zPlaneCoord.x/horizontalFovUser, 0.5+0.5*zPlaneCoord.y/horizontalFovUser*aspectRatioUser));
     } else {
       gl_FragColor = vec4(0.5);
     }
