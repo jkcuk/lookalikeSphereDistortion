@@ -131,7 +131,8 @@ function draw() {
    betax *= beta/beta0;
    betay *= beta/beta0;
    betaz *= beta/beta0;
-   
+
+   console.log("Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))");
    const contentString = "Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))";
    errorText.html(contentString.fontcolor("red")); 
  } else{
