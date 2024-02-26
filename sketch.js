@@ -149,7 +149,7 @@ function draw() {
 
   if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
   if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (${betax.toFixed(2)}, ${betay.toFixed(2)}, ${betaz.toFixed(2)})`);
+  errorText.html(`environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
   // distorted lookalike sphere
   fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
