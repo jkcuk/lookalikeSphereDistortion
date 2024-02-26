@@ -21,7 +21,7 @@ let betaySlider;
 let betazSlider;
 let cameraFOVSlider;
 let screenFOVSlider;
-let errorText;
+let status;
 let aspectRatioUser, aspectRatioEnvironment;
 let fudgeFactor;
 let screenFOV;
@@ -64,8 +64,8 @@ function setup() {
   screenFOVSlider.position(50, windowHeight-50);
   screenFOVSlider.size(windowWidth-100);
 
-  errorText = createP();
-  errorText.position(10, 0);
+  status = createP();
+  status.position(10, 0);
 
   let button = createButton('set user camera FOV');
   button.position(50, windowHeight-100);
@@ -131,7 +131,7 @@ function draw() {
 
     console.log(`Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))`);
     // const contentString = "Beta >= 1, scaling it to 0.99 (beta = (${betax}, ${betay}, ${betaz}))";
-    // errorText.html(contentString.fontcolor("red")); 
+    // status.html(contentString.fontcolor("red")); 
   } else{
     beta=sqrt(beta2);
   }
@@ -149,7 +149,7 @@ function draw() {
 
   if(cameraUser) aspectRatioUser=cameraUser.width/cameraUser.height;
   if(cameraEnvironment) aspectRatioEnvironment=cameraEnvironment.width/cameraEnvironment.height;
-  errorText.html(`environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
+  status.html(`environment camera: ${cameraEnvironment.width}x${cameraEnvironment.height}, user camera: ${cameraUser.width}x${cameraUser.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
   // distorted lookalike sphere
   fudgeFactor = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
