@@ -23,13 +23,10 @@ let alphaE = 0.0, betaE = 0.0, gammaE = 0.0;
 let betaxSlider;
 let betaySlider;
 let betazSlider;
-let cameraFOVSlider;
-let screenFOVSlider;
 let status;
 let aspectRatioU, aspectRatioE; // aspect ratio (= width / height) for user-facing / environment-facing camera
 let tanHalfFovHU, tanHalfFovVU; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for user-facing camera
 let tanHalfFovHE, tanHalfFovVE; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for environment-facing camera
-let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
 let sphereRotationSlider;
 
@@ -77,13 +74,6 @@ function setup() {
   ff4.position(10,150-17);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
 
-  cameraFOVSlider = createSlider(10, 150, 90, 0);
-  cameraFOVSlider.position(50, windowHeight-100);
-  cameraFOVSlider.size(windowWidth-100);
-
-  screenFOVSlider = createSlider(1, 150, 90, 0);
-  screenFOVSlider.position(50, windowHeight-50);
-  screenFOVSlider.size(windowWidth-100);
 
   let x=10;
   let y=windowHeight-40;
@@ -99,7 +89,7 @@ function setup() {
   x += fovUP.size().width;
   fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
 
-  let fovUButton = createButton(`set`);
+  let fovUButton = createButton(`User camera FOV 000.00°`);
   fovUButton.position(x, y);
   fovUButton.mousePressed(() => {
     var fovString = prompt("User camera FOV (°):", String(fovU.toFixed(2)));
@@ -107,10 +97,11 @@ function setup() {
     if(!isNaN(fov)) 
     {
       fovU = fov;
-      fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
+      fovUButton.html(`User camera FOV `+String(fovU.toFixed(2))+`°`);  // set to actual string
     }
   });
   x += fovUButton.size().width;
+  fovUButton.html(`User camera FOV `+String(fovU.toFixed(2))+`°`);
 
   p = createP();
   p.position(x, y);
@@ -138,16 +129,6 @@ function setup() {
 
   status = createP();
   status.position(10, 0);
-
-  let button = createButton('set user camera FOV');
-  button.position(50, windowHeight-100);
-
-  // Use the button to change the background color.
-  button.mousePressed(() => {
-    var fovString = prompt("User camera FOV (°):", String(cameraFOVSlider.value().toFixed(2)));
-    var fov = float(fovString);
-    if(!isNaN(fov)) cameraFOVSlider.value(fov);
-  });
 
   tofOnlyCheckbox = createCheckbox();
   tofOnlyCheckbox.position(50, 200);
@@ -253,7 +234,7 @@ function draw() {
   aspectRatioE = cameraE.width/cameraE.height;
   status.html(`v1.3 environment camera: ${cameraE.width}x${cameraE.height}, user camera: ${cameraU.width}x${cameraU.height}, beta: (`+String(betax.toFixed(2))+`, `+String(betay.toFixed(2))+`, `+String(betaz.toFixed(2))+`)`);
 
-  let tanHalfWiderFovU = Math.tan(0.5*Math.PI/180.0*cameraFOVSlider.value());
+  let tanHalfWiderFovU = Math.tan(0.5*Math.PI/180.0*fovU);
   if(aspectRatioU > 1.0) {
     // the horizontal FOV is wider
     tanHalfFovHU = tanHalfWiderFovU;
@@ -264,8 +245,6 @@ function draw() {
     tanHalfFovHU = tanHalfWiderFovU * aspectRatioU;
   }
   
-  screenFOV = screenFOVSlider.value();
-
   // distorted lookalike sphere
   // if(outsideViewCheckbox.checked()) {
   //   sphereRotationSlider.show();
@@ -294,7 +273,7 @@ function draw() {
   theShader.setUniform('tanHalfFovVU', tanHalfFovVU);
   theShader.setUniform('tanHalfFovHE', tanHalfFovHU);
   theShader.setUniform('tanHalfFovVE', tanHalfFovVU);
-  perspective(screenFOV*PI/180, width/height, 0.01,50000);
+  perspective(fovS*PI/180, width/height, 0.01,50000);
 
   resetShader();
   shader(theShader);
