@@ -15,8 +15,9 @@ let gamma;
 let phi=0;
 let theta=0;
 
-// rotation of the view
-let thetaView = 0.0, phiView = 0.0, thetaView0, phiView0;
+// (Euler) rotation of the view
+let alpha = 0.0, beta = 0.0, gamma = 0.0;
+// let thetaView = 0.0, phiView = 0.0, thetaView0, phiView0;
 
 
 let betaxSlider;
@@ -213,8 +214,11 @@ function draw() {
     // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     // rotateY(mouseX/100);
     // rotateX(mouseY/100);
-    rotateY(phiView);
-    rotateX(thetaView);  
+    rotateX(gamma);
+    rotateY(beta);
+    rotateX(alpha);
+    // rotateY(phiView);
+    // rotateX(thetaView);  
   // } else {
   //   sphereRotationSlider.hide();
   // }
@@ -246,12 +250,19 @@ function windowResized() {
 
 let touchX, touchY;
 let touch;
+let alpha0, beta0, gamma0;
+// let xHat, yHat;
 function touchStarted() {
   touch = true;
   touchX = mouseX;
   touchY = mouseY;
-  thetaView0 = thetaView;
-  phiView0 = phiView;
+  // thetaView0 = thetaView;
+  // phiView0 = phiView;
+  alpha0 = alpha;
+  beta0 = beta;
+  gamma0 = gamma;
+  // let s = sin(thetaView0);
+  // xHat = createVector(s*cos(phiView0), s*sin(phiView0),cos(thetaView0));
 }
 function touchEnded() {
   touch = false;
@@ -260,8 +271,9 @@ function touchMoved() {
   if(touch) {
     let dx = mouseX - touchX;
     let dy = mouseY - touchY;
-    thetaView = thetaView0 - dy*Math.PI/180.0;
-    phiView = phiView0 + dx*Math.PI/180.0;
-    console.log("thetaView, phiView = "+thetaView+", "+phiView);
+    
+    alpha = alpha0 - dy*Math.PI/180.0;
+    beta = beta0 + dx*Math.PI/180.0;
+    // console.log("thetaView, phiView = "+thetaView+", "+phiView);
   }
 }
