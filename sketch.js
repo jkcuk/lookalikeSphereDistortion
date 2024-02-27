@@ -205,8 +205,8 @@ function draw() {
   // distorted lookalike sphere
   if(outsideViewCheckbox.checked()) {
     sphereRotationSlider.show();
-    rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     translate(0, 0, -2);
+    rotateY(sphereRotationSlider.value()*Math.PI/180.0);
   } else {
     sphereRotationSlider.hide();
   }
