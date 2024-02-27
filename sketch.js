@@ -33,6 +33,11 @@ let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
 let sphereRotationSlider;
 
+// FOV of cameras / screen
+let fovU = 66; // FOV (larger angle) of user-facing camera
+let fovE = 90; // FOV of environment-facing camera
+let fovS = 90; // FOV of screen
+
 // UI
 let fovUP, fovEP, fovSP;
 
@@ -85,23 +90,37 @@ function setup() {
 
   text = createP();
   text.position(x, y);
-  text.html(`user camera FOV`);
+  text.html(`user camera FOV `);
   x += text.size().width;
 
   fovUP = createP();
   fovUP.position(x, y);
-  fovUP.html(`000.00°`);
+  fovUP.html(`000.00° `); // set to string representing max width
   x += fovUP.size().width;
+  fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
+
+  let fovUButton = createButton(`set`);
+  fovUButton.position(x, y);
+  fovUButton.mousePressed(() => {
+    var fovString = prompt("User camera FOV (°):", String(fovU.toFixed(2)));
+    var fov = float(fovString);
+    if(!isNaN(fov)) 
+    {
+      fovU = fov;
+      fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
+    }
+  });
 
   text = createP();
   text.position(x, y);
-  text.html(`environment camera FOV`);
+  text.html(`environment camera FOV `);
   x += text.size().width;
 
   fovEP = createP();
   fovEP.position(x, y);
-  fovEP.html(`000.00°`);
+  fovEP.html(`000.00° `);
   x += fovEP.size().width;
+  fovEP.html(String(fovE.toFixed(2))+`°`);  // set to actual string
 
   status = createP();
   status.position(10, 0);
