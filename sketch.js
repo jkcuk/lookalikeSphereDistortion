@@ -203,13 +203,6 @@ function draw() {
   screenFOV = screenFOVSlider.value();
 
   // distorted lookalike sphere
-  rotateY(phi);
-  rotateX(theta);
-  console.log('gamma=${gamma}');
-  if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
-  translate(0,0,beta); // radius*beta);
-  rotateX(-theta);
-  rotateY(-phi);
   if(outsideViewCheckbox.checked()) {
     sphereRotationSlider.show();
     rotateY(sphereRotationSlider.value()*Math.PI/180.0);
@@ -217,6 +210,14 @@ function draw() {
   } else {
     sphereRotationSlider.hide();
   }
+ 
+  rotateY(phi);
+  rotateX(theta);
+  console.log('gamma=${gamma}');
+  if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
+  translate(0,0,beta); // radius*beta);
+  rotateX(-theta);
+  rotateY(-phi);
   theShader.setUniform('cameraE', cameraE);
   theShader.setUniform('cameraU', cameraU);
   theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
