@@ -209,7 +209,7 @@ function draw() {
   // distorted lookalike sphere
   // if(outsideViewCheckbox.checked()) {
   //   sphereRotationSlider.show();
-    translate(0, 0, -2);
+  if(outsideViewCheckbox.checked()) translate(0, 0, -2);
     // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     // rotateY(mouseX/100);
     // rotateX(mouseY/100);
