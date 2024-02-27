@@ -16,7 +16,7 @@ let phi=0;
 let theta=0;
 
 // rotation of the view
-let thetaView = 0.0, phiView = 0.0;
+let thetaView = 0.0, phiView = 0.0, thetaView0, phiView0;
 
 
 let betaxSlider;
@@ -246,13 +246,22 @@ function windowResized() {
 }
 
 let touchX, touchY;
-function touchMoved() {
-  if(touchX) {
-    let dx = mouseX - touchX;
-    let dy = mouseY - touchY;
-    thetaView -= dy*Math.PI/180.0;
-    phiView += dx*Math.PI/180.0;
-  }
+let touch;
+function touchStarted() {
+  touch = true;
   touchX = mouseX;
   touchY = mouseY;
+  theta0 = theta;
+  phi0 = phi;
+}
+function touchEnded() {
+  touch = false;
+}
+function touchMoved() {
+  if(touch) {
+    let dx = mouseX - touchX;
+    let dy = mouseY - touchY;
+    thetaView = thetaView0 - dy*Math.PI/180.0;
+    phiView = phiView0 + dx*Math.PI/180.0;
+  }
 }
