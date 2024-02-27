@@ -207,17 +207,17 @@ function draw() {
   screenFOV = screenFOVSlider.value();
 
   // distorted lookalike sphere
-  if(outsideViewCheckbox.checked()) {
-    sphereRotationSlider.show();
+  // if(outsideViewCheckbox.checked()) {
+  //   sphereRotationSlider.show();
     translate(0, 0, -2);
     // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     // rotateY(mouseX/100);
     // rotateX(mouseY/100);
     rotateY(phiView);
     rotateX(thetaView);  
-  } else {
-    sphereRotationSlider.hide();
-  }
+  // } else {
+  //   sphereRotationSlider.hide();
+  // }
  
   rotateY(phi);
   rotateX(theta);
