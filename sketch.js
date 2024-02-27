@@ -36,7 +36,6 @@ let fovE = 90; // FOV of environment-facing camera
 let fovS = 90; // FOV of screen
 
 // UI
-let fovUP, fovEP, fovSP;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -78,43 +77,21 @@ function setup() {
   let x=10;
   let y=windowHeight-40;
 
-  p = createP();
-  p.position(x, y);
-  p.html(`user camera FOV `);
-  x += p.size().width;
-
-  fovUP = createP();
-  fovUP.position(x, y);
-  fovUP.html(`000.00° `); // set to string representing max width
-  x += fovUP.size().width;
-  fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
-
-  let fovUButton = createButton(`User camera FOV 000.00°`);
+  let fovUButton = createButton(`User-facing camera FOV 000.00°`);
   fovUButton.position(x, y);
   fovUButton.mousePressed(() => {
-    var fovString = prompt("User camera FOV (°):", String(fovU.toFixed(2)));
+    var fovString = prompt("User-facing camera FOV (°):", String(fovU.toFixed(2)));
     var fov = float(fovString);
     if(!isNaN(fov)) 
     {
       fovU = fov;
-      fovUButton.html(`User camera FOV `+String(fovU.toFixed(2))+`°`);  // set to actual string
+      fovUButton.html(`User-facing camera FOV `+String(fovU.toFixed(2))+`°`);  // set to actual string
     }
   });
   x += fovUButton.size().width;
-  fovUButton.html(`User camera FOV `+String(fovU.toFixed(2))+`°`);
+  fovUButton.html(`User-facing camera FOV `+String(fovU.toFixed(2))+`°`);
 
-  p = createP();
-  p.position(x, y);
-  p.html(`environment camera FOV `);
-  x += p.size().width;
-
-  fovEP = createP();
-  fovEP.position(x, y);
-  fovEP.html(`000.00° `);
-  x += fovEP.size().width;
-  fovEP.html(String(fovE.toFixed(2))+`°`);  // set to actual string
-
-  let fovEButton = createButton(`set`);
+  let fovEButton = createButton(`Environment-facing camera FOV 000.00°`);
   fovEButton.position(x, y);
   fovEButton.mousePressed(() => {
     var fovString = prompt("Environment-facing camera FOV (°):", String(fovE.toFixed(2)));
@@ -122,10 +99,26 @@ function setup() {
     if(!isNaN(fov)) 
     {
       fovE = fov;
-      fovEP.html(String(fovE.toFixed(2))+`°`);  // set to actual string
+      fovEButton.html(`Environment-facing camera FOV `+String(fovE.toFixed(2))+`°`);  // set to actual string
     }
   });
   x += fovEButton.size().width;
+  fovEButton.html(`Environment-facing camera FOV `+String(fovE.toFixed(2))+`°`);
+
+  let fovSButton = createButton(`Screen FOV 000.00°`);
+  fovSButton.position(x, y);
+  fovSButton.mousePressed(() => {
+    var fovString = prompt("Screen FOV (°):", String(fovS.toFixed(2)));
+    var fov = float(fovString);
+    if(!isNaN(fov)) 
+    {
+      fovS = fov;
+      fovSButton.html(`Screen FOV `+String(fovS.toFixed(2))+`°`);  // set to actual string
+    }
+  });
+  x += fovSButton.size().width;
+  fovSButton.html(`Screen FOV `+String(fovS.toFixed(2))+`°`);
+
 
   status = createP();
   status.position(10, 0);
@@ -245,6 +238,17 @@ function draw() {
     tanHalfFovHU = tanHalfWiderFovU * aspectRatioU;
   }
   
+  let tanHalfWiderFovE = Math.tan(0.5*Math.PI/180.0*fovE);
+  if(aspectRatioE > 1.0) {
+    // the horizontal FOV is wider
+    tanHalfFovHE = tanHalfWiderFovE;
+    tanHalfFovVE = tanHalfWiderFovE / aspectRatioE;
+  } else {
+    // the vertical FOV is wider
+    tanHalfFovVE = tanHalfWiderFovE;
+    tanHalfFovHE = tanHalfWiderFovE * aspectRatioE;
+  }
+  
   // distorted lookalike sphere
   // if(outsideViewCheckbox.checked()) {
   //   sphereRotationSlider.show();
@@ -271,9 +275,9 @@ function draw() {
   theShader.setUniform('cameraU', cameraU);
   theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
   theShader.setUniform('tanHalfFovVU', tanHalfFovVU);
-  theShader.setUniform('tanHalfFovHE', tanHalfFovHU);
-  theShader.setUniform('tanHalfFovVE', tanHalfFovVU);
-  perspective(fovS*PI/180, width/height, 0.01,50000);
+  theShader.setUniform('tanHalfFovHE', tanHalfFovHE);
+  theShader.setUniform('tanHalfFovVE', tanHalfFovVE);
+  perspective(fovS*PI/180.0, width/height, 0.01, 10);
 
   resetShader();
   shader(theShader);
