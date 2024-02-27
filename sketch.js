@@ -207,8 +207,10 @@ function draw() {
     sphereRotationSlider.show();
     translate(0, 0, -2);
     // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
-    rotateY(mouseX/100);
-    rotateX(mouseY/100);
+    // rotateY(mouseX/100);
+    // rotateX(mouseY/100);
+    rotateY(phi);
+    rotateX(theta);  
   } else {
     sphereRotationSlider.hide();
   }
@@ -237,4 +239,16 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+let touchX, touchY;
+function touchMoved() {
+  if(touchX) {
+    let dx = mouseX - touchX;
+    let dy = mouseY - touchY;
+    theta -= dy*Math.PI/180.0;
+    phi += dx*Math.PI/180.0;
+  }
+  touchX = mouseX;
+  touchY = mouseY;
 }
