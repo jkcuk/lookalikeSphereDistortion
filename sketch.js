@@ -15,6 +15,10 @@ let gamma;
 let phi=0;
 let theta=0;
 
+// rotation of the view
+let thetaView = 0.0, phiView = 0.0;
+
+
 let betaxSlider;
 let betaySlider;
 let betazSlider;
@@ -209,8 +213,8 @@ function draw() {
     // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     // rotateY(mouseX/100);
     // rotateX(mouseY/100);
-    rotateY(phi);
-    rotateX(theta);  
+    rotateY(phiView);
+    rotateX(thetaView);  
   } else {
     sphereRotationSlider.hide();
   }
@@ -246,8 +250,8 @@ function touchMoved() {
   if(touchX) {
     let dx = mouseX - touchX;
     let dy = mouseY - touchY;
-    theta -= dy*Math.PI/180.0;
-    phi += dx*Math.PI/180.0;
+    thetaView -= dy*Math.PI/180.0;
+    phiView += dx*Math.PI/180.0;
   }
   touchX = mouseX;
   touchY = mouseY;
