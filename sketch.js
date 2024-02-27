@@ -88,10 +88,10 @@ function setup() {
   let x=10;
   let y=windowHeight-40;
 
-  text = createP();
-  text.position(x, y);
-  text.html(`user camera FOV `);
-  x += text.size().width;
+  p = createP();
+  p.position(x, y);
+  p.html(`user camera FOV `);
+  x += p.size().width;
 
   fovUP = createP();
   fovUP.position(x, y);
@@ -112,10 +112,10 @@ function setup() {
   });
   x += fovUButton.size().width;
 
-  text = createP();
-  text.position(x, y);
-  text.html(`environment camera FOV `);
-  x += text.size().width;
+  p = createP();
+  p.position(x, y);
+  p.html(`environment camera FOV `);
+  x += p.size().width;
 
   fovEP = createP();
   fovEP.position(x, y);
