@@ -110,6 +110,7 @@ function setup() {
       fovUP.html(String(fovU.toFixed(2))+`°`);  // set to actual string
     }
   });
+  x += fovUButton.size().width;
 
   text = createP();
   text.position(x, y);
@@ -121,6 +122,19 @@ function setup() {
   fovEP.html(`000.00° `);
   x += fovEP.size().width;
   fovEP.html(String(fovE.toFixed(2))+`°`);  // set to actual string
+
+  let fovEButton = createButton(`set`);
+  fovEButton.position(x, y);
+  fovEButton.mousePressed(() => {
+    var fovString = prompt("Environment-facing camera FOV (°):", String(fovE.toFixed(2)));
+    var fov = float(fovString);
+    if(!isNaN(fov)) 
+    {
+      fovE = fov;
+      fovEP.html(String(fovE.toFixed(2))+`°`);  // set to actual string
+    }
+  });
+  x += fovEButton.size().width;
 
   status = createP();
   status.position(10, 0);
