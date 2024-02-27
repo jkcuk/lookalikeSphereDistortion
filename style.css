@@ -5,3 +5,9 @@ html, body {
 canvas {
   display: block;
 }
+button {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  line-height: 65px;
+}
