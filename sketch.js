@@ -33,6 +33,9 @@ let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
 let sphereRotationSlider;
 
+// UI
+let fovUP, fovEP, fovSP;
+
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
 }
@@ -76,6 +79,29 @@ function setup() {
   screenFOVSlider = createSlider(1, 150, 90, 0);
   screenFOVSlider.position(50, windowHeight-50);
   screenFOVSlider.size(windowWidth-100);
+
+  let x=10;
+  let y=windowHeight-40;
+
+  text = createP();
+  text.position(x, y);
+  text.html(`user camera FOV`);
+  x += text.size().width;
+
+  fovUP = createP();
+  fovUP.position(x, y);
+  fovUP.html(`000.00°`);
+  x += fovUP.size().width;
+
+  text = createP();
+  text.position(x, y);
+  text.html(`environment camera FOV`);
+  x += text.size().width;
+
+  fovEP = createP();
+  fovEP.position(x, y);
+  fovEP.html(`000.00°`);
+  x += fovEP.size().width;
 
   status = createP();
   status.position(10, 0);
