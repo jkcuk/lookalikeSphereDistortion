@@ -94,7 +94,7 @@ function setup() {
   outsideViewCheckbox = createCheckbox();
   outsideViewCheckbox.position(110, 200);
 
-  sphereRotationSlider = createSlider(0, 360, 0, 0);
+  sphereRotationSlider = createSlider(-180, 180, 0, 0);
   sphereRotationSlider.position(50, 210);
   sphereRotationSlider.size(windowWidth-100);
   
@@ -205,13 +205,17 @@ function draw() {
   // distorted lookalike sphere
   rotateY(phi);
   rotateX(theta);
+  console.log('gamma=${gamma}');
   if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
   if(outsideViewCheckbox.checked()) {
+    sphereRotationSlider.show();
     rotateY(sphereRotationSlider.value()*Math.PI/180.0);
     translate(0, 0, -2);
+  } else {
+    sphereRotationSlider.hide();
   }
   theShader.setUniform('cameraE', cameraE);
   theShader.setUniform('cameraU', cameraU);
