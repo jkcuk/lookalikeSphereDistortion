@@ -221,7 +221,6 @@ function draw() {
  
   rotateY(phi);
   rotateX(theta);
-  console.log('gamma=${gamma}');
   if(tofOnlyCheckbox.checked()) scale(1/gamma, 1/gamma, 1);
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
@@ -251,8 +250,8 @@ function touchStarted() {
   touch = true;
   touchX = mouseX;
   touchY = mouseY;
-  theta0 = theta;
-  phi0 = phi;
+  thetaView0 = thetaView;
+  phiView0 = phiView;
 }
 function touchEnded() {
   touch = false;
@@ -263,5 +262,6 @@ function touchMoved() {
     let dy = mouseY - touchY;
     thetaView = thetaView0 - dy*Math.PI/180.0;
     phiView = phiView0 + dx*Math.PI/180.0;
+    console.log("thetaView, phiView = "+thetaView+", "+phiView);
   }
 }
