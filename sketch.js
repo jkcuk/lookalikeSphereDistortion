@@ -28,7 +28,6 @@ let aspectRatioU, aspectRatioE; // aspect ratio (= width / height) for user-faci
 let tanHalfFovHU, tanHalfFovVU; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for user-facing camera
 let tanHalfFovHE, tanHalfFovVE; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for environment-facing camera
 let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
-let sphereRotationSlider;
 
 // FOV of cameras / screen
 let fovU = 66; // FOV (larger angle) of user-facing camera
@@ -36,6 +35,7 @@ let fovE = 90; // FOV of environment-facing camera
 let fovS = 90; // FOV of screen
 
 // UI
+let viewSelect; // dropdown menu for view (inside lookalike sphere / outside lookalike sphere)
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -72,6 +72,12 @@ function setup() {
   ff4 = createP();
   ff4.position(10,150-17);
   ff4.html(`&#946;<sub><i>z</i></sub> =`);
+
+  viewSelect = createSelect();
+  viewSelect.position(0, 100);
+  viewSelect.option('inside (distorted) lookalike sphere', 'inside');
+  viewSelect.option('outside (distorted) lookalike sphere', 'outside');
+  viewSelect.selected('inside (distorted) lookalike sphere');
 
 
   let x=10;
@@ -132,10 +138,6 @@ function setup() {
   outsideViewCheckbox = createCheckbox();
   outsideViewCheckbox.position(110, 200);
 
-  sphereRotationSlider = createSlider(-180, 180, 0, 0);
-  sphereRotationSlider.position(50, 210);
-  sphereRotationSlider.size(windowWidth-100);
-  
   //var checkbox = document.querySelector("input[name=checkbox]");
   //checkbox.position(110, 200);
 
@@ -251,9 +253,8 @@ function draw() {
   
   // distorted lookalike sphere
   // if(outsideViewCheckbox.checked()) {
-  //   sphereRotationSlider.show();
-  if(outsideViewCheckbox.checked()) translate(0, 0, -2);
-    // rotateY(sphereRotationSlider.value()*Math.PI/180.0);
+  // if(outsideViewCheckbox.checked()) 
+  if(viewSelect.selected() === `outside`) translate(0, 0, -2);
     // rotateY(mouseX/100);
     // rotateX(mouseY/100);
     rotateX(gammaE);
@@ -262,7 +263,6 @@ function draw() {
     // rotateY(phiView);
     // rotateX(thetaView);  
   // } else {
-  //   sphereRotationSlider.hide();
   // }
  
   rotateY(phi);
