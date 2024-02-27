@@ -25,7 +25,7 @@ let aspectRatioU, aspectRatioE; // aspect ratio (= width / height) for user-faci
 let tanHalfFovHU, tanHalfFovVU; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for user-facing camera
 let tanHalfFovHE, tanHalfFovVE; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for environment-facing camera
 let screenFOV;
-let tofOnlyCheckbox, highResolutionCheckbox;
+let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -89,6 +89,9 @@ function setup() {
 
   highResolutionCheckbox = createCheckbox();
   highResolutionCheckbox.position(80, 200);
+
+  outsideViewCheckbox = createCheckbox();
+  outsideViewCheckbox.position(110, 200);
   
   //var checkbox = document.querySelector("input[name=checkbox]");
   //checkbox.position(110, 200);
@@ -105,6 +108,7 @@ function setup() {
 
 /** run this whenever the resolution or screen orientation changes */
 function createVideoStreams() {
+  console.log("createVideoStreams()");
   let idealWidth, idealHeight;
   if(highResolutionCheckbox.checked()) {
     idealWidth = 4096;
@@ -200,6 +204,7 @@ function draw() {
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
+  if(outsideViewCheckbox.checked()) translate(0, 0, -2);
   theShader.setUniform('cameraE', cameraE);
   theShader.setUniform('cameraU', cameraU);
   theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
