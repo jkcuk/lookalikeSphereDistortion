@@ -26,6 +26,7 @@ let tanHalfFovHU, tanHalfFovVU; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical
 let tanHalfFovHE, tanHalfFovVE; // tan(0.5*FOV_horizontal), tan(0.5*FOV_vertical) for environment-facing camera
 let screenFOV;
 let tofOnlyCheckbox, highResolutionCheckbox, outsideViewCheckbox;
+let sphereRotationSlider;
 
 function preload() {
  theShader = loadShader('vert.vert', 'frag.frag');
@@ -92,6 +93,10 @@ function setup() {
 
   outsideViewCheckbox = createCheckbox();
   outsideViewCheckbox.position(110, 200);
+
+  sphereRotationSlider = createSlider(0, 360, 0, 0);
+  sphereRotationSlider.position(50, 210);
+  sphereRotationSlider.size(windowWidth-100);
   
   //var checkbox = document.querySelector("input[name=checkbox]");
   //checkbox.position(110, 200);
@@ -204,7 +209,10 @@ function draw() {
   translate(0,0,beta); // radius*beta);
   rotateX(-theta);
   rotateY(-phi);
-  if(outsideViewCheckbox.checked()) translate(0, 0, -2);
+  if(outsideViewCheckbox.checked()) {
+    rotateY(sphereRotationSlider.value()*Math.PI/180.0);
+    translate(0, 0, -2);
+  }
   theShader.setUniform('cameraE', cameraE);
   theShader.setUniform('cameraU', cameraU);
   theShader.setUniform('tanHalfFovHU', tanHalfFovHU);
